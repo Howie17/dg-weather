@@ -1,17 +1,16 @@
 import React from 'react';
 import './Nav.css';
-import DisplayMode from './DisplayMode';
-
+import { Link } from 'react-router';
 
 class Nav extends React.Component {
     render() {
 
         return (
             <div className="navBar">
-                Display Modes: 
-                <button onClick={<DisplayMode mode="PlayableForecast" />} className="button">Playable Forecast</button> |
-                <button onClick={<DisplayMode mode="CourseSearchForecast" />} className="button">Course Search Forecast</button> |
-                <button onClick={<DisplayMode mode="PlayableByDay" />} className="button">Playable Courses by Day</button>
+                Display Modes:
+                <Link to="PlayableByDay"><button className="button">Playable Courses by Day</button></Link> |
+                <Link to="CourseSearchForecast"><button className="button">Course Search Forecast</button></Link> |
+                <Link to="/"><button className="button">Playable Forecast</button></Link>
             </div>
         );
     }

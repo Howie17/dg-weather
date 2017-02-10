@@ -1,17 +1,26 @@
 import React from 'react';
-import './Forecast.css';
+import '../Forecast.css';
 
 
-class CourseSearchForecast extends React.Component {
+class PlayableForecast extends React.Component {
     render() {
         return (
             <div className="container">
-                <h3>Course Search Forecast</h3>
+            <h2>Playable Forecast</h2>
+            <h3>Home Courses </h3>              
                 <Tile heading="Woodlands Park" attr1="75 degrees" attr2="5-10 mph winds" attr3="20% chance of rain" attr4="Course Condition: Muddy" />
                 <Tile heading="Carter Park" attr1="77 degrees" attr2="10-14 mph winds" attr3="15% chance of rain" attr4="Course Condition: Partially Flooded" />
                 <Tile heading="Ottawa Park" attr1="79 degrees" attr2="3-8 mph winds" attr3="25% chance of rain" attr4="Course Condition: Muddy" />
-                <Tile heading="Vienna Park" attr1="77 degrees" attr2="6-12 mph winds" attr3="40% chance of rain" attr4="Course Condition: Muddy" />
+            <h3>Drivable Courses</h3>
+                <Tile heading="Vienna Park" attr1="75 degrees" attr2="5-10 mph winds" attr3="20% chance of rain" attr4="Course Condition: Muddy" />
+                <Tile heading="The Ponds at Lakeshore" attr1="77 degrees" attr2="10-14 mph winds" attr3="15% chance of rain" attr4="Course Condition: Partially Flooded" />
+                <Tile heading="Rolling Hills" attr1="79 degrees" attr2="3-8 mph winds" attr3="25% chance of rain" attr4="Course Condition: Muddy" />
+                <Tile heading="Hudson Mills" attr1="77 degrees" attr2="6-12 mph winds" attr3="40% chance of rain" attr4="Course Condition: Muddy" />
+            <h3>Recent Searches</h3>
+                <Tile heading="Brent Hambrick Memorial DGC" attr1="75 degrees" attr2="5-10 mph winds" attr3="20% chance of rain" attr4="Course Condition: Muddy" />
+                <Tile heading="Glacier Ridge" attr1="77 degrees" attr2="10-14 mph winds" attr3="15% chance of rain" attr4="Course Condition: Partially Flooded" />
             </div>
+
         );
     }
 }
@@ -29,4 +38,4 @@ function Tile(props) {
 }
 
 
-export default CourseSearchForecast;
+export default PlayableForecast;

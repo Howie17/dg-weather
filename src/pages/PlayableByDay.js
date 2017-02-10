@@ -1,12 +1,12 @@
 import React from 'react';
-import './Forecast.css';
+import '../Forecast.css';
 
 
-class PlayableForecast extends React.Component {
+class PlayableByDay extends React.Component {
     render() {
         return (
             <div className="container">
-            <h3>Playable Forecast</h3>              
+                <h3>Playable By Day</h3>
                 <Tile heading="Woodlands Park" attr1="75 degrees" attr2="5-10 mph winds" attr3="20% chance of rain" attr4="Course Condition: Muddy" />
                 <Tile heading="Carter Park" attr1="77 degrees" attr2="10-14 mph winds" attr3="15% chance of rain" attr4="Course Condition: Partially Flooded" />
                 <Tile heading="Ottawa Park" attr1="79 degrees" attr2="3-8 mph winds" attr3="25% chance of rain" attr4="Course Condition: Muddy" />
@@ -29,4 +29,4 @@ function Tile(props) {
 }
 
 
-export default PlayableForecast;
+export default PlayableByDay;
