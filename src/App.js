@@ -14,7 +14,7 @@ class App extends Component {
           </div>
         </div>
         <div className="Body">
-          <DisplayMode mode="PlayableForecast" />
+          <DisplayMode />
         </div>
       </div>
     );
