@@ -15,8 +15,8 @@ class Nav extends React.Component {
                 {/*
                 <Link to="/"><button className="button">Playable Forecast</button></Link> | 
                 <Link to="/Preferences"><button className="button">Preferences</button></Link> 
-                <Link to="/DSForecast"><button className="button">dsForecast</button></Link> 
                 */}
+                <Link to="/DSForecast"><button className="button">dsForecast</button></Link>                
             </div>
         );
     }

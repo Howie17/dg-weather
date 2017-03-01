@@ -12,8 +12,9 @@ import Layout from './components/Layout';
 import PlayableByDay from './pages/PlayableByDay';
 import PlayableForecast from './pages/PlayableForecast';
 import Preferences from './pages/Preferences';
-import DSForecast from './pages/DSForecast'
 */
+import DSForecast from './pages/DSForecast'
+
 
 const app = document.getElementById('app');
 ReactDOM.render(
@@ -24,7 +25,8 @@ ReactDOM.render(
                 {/*
                 <Route path="playablebyday" component={PlayableByDay}></Route>
                 <Route path="preferences" component={Preferences}></Route>
-                <Route path="dsforecast" component={DSForecast}></Route> */}
+                */}
+                <Route path="dsforecast" component={DSForecast}></Route> 
             </Route>
         </Router>, 
 app);
