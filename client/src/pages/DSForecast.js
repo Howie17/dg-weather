@@ -40,8 +40,8 @@ class DSSearch extends React.Component {
         //var output = '';
         var FORECAST = [];
         fetch(myRequest)
-            .then(function(response) { return response.json(); })
-            .then(function(json) {
+            .then(response => response.json())
+            .then((json)=> {
                 FORECAST = json;
                 console.log(FORECAST);
                 console.log(this);
