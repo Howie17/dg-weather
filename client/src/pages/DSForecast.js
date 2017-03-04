@@ -33,30 +33,28 @@ class DSSearch extends React.Component {
         this.setState({value: event.target.value});
     }
 
-    handleSearchClick() {
+    async handleSearchClick() {
         this.setState({isSearchClick: true});
         var textValue = this.state.value;                                                                  //todo: onError display error msg "Course not found." 
         var myRequest = new Request('/api/course/' + textValue);
         //var output = '';
         var FORECAST = [];
-        fetch(myRequest)
-            .then(response => response.json())
-            .then((json)=> {
-                FORECAST = json;
-                console.log(FORECAST);
-                console.log(this);
-                /*
-                for (var i = 0; i <= FORECAST.minutely.data.length; i++) {                              // Guide: https://www.youtube.com/watch?v=HWdLisBrlV8 array at 13:30
-                    for (var key in FORECAST.minutely.data[i]) {
-                        if (FORECAST.minutely.data[i].hasOwnProperty(key)) {
-                            output += '<li>' + FORECAST.minutely.data[i][key] + '</li>';
-                        }   // hasOwnProperty check
-                    }       //for each object
-                }           //for each array element
-                console.log(output);
-                */
-                this.setState({forecast: FORECAST});
-            })
+        var json = await (await fetch(myRequest)).json()
+
+        FORECAST = json;
+        console.log(FORECAST);
+        console.log(this);
+        /*
+        for (var i = 0; i <= FORECAST.minutely.data.length; i++) {                              // Guide: https://www.youtube.com/watch?v=HWdLisBrlV8 array at 13:30
+            for (var key in FORECAST.minutely.data[i]) {
+                if (FORECAST.minutely.data[i].hasOwnProperty(key)) {
+                    output += '<li>' + FORECAST.minutely.data[i][key] + '</li>';
+                }   // hasOwnProperty check
+            }       //for each object
+        }           //for each array element
+        console.log(output);
+        */
+        this.setState({forecast: FORECAST});
     }
     render(){
         var displayWeekly = '';
