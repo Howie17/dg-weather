@@ -6,7 +6,7 @@ class Footer extends React.Component {
 
         return (
             <div className="Footer">
-                <h4>Powered by Dark Sky</h4>
+                <a href="https://darksky.net/poweredby/"><h4>Powered by Dark Sky</h4></a>
             </div>
         );
     }

@@ -8,7 +8,7 @@ class DSForecast extends React.Component {
             <div>
                 <DSSearch />
                 <ol className="minutelyData">
-                    {''}
+
                 </ol>
             </div>
         );
@@ -43,8 +43,7 @@ class DSSearch extends React.Component {
             .then(response => response.json())
             .then((json)=> {
                 FORECAST = json;
-                console.log(FORECAST);
-                console.log(this);
+                this.setState({forecast: FORECAST});
                 /*
                 for (var i = 0; i <= FORECAST.minutely.data.length; i++) {                              // Guide: https://www.youtube.com/watch?v=HWdLisBrlV8 array at 13:30
                     for (var key in FORECAST.minutely.data[i]) {
@@ -55,13 +54,13 @@ class DSSearch extends React.Component {
                 }           //for each array element
                 console.log(output);
                 */
-                this.setState({forecast: FORECAST});
+                
             })
     }
     render(){
         var displayWeekly = '';
         if (this.state.isSearchClick) {
-            displayWeekly = <DSWeekly name={this.state.value}/>;
+            displayWeekly = <DSWeekly name={this.state.value} forecast={this.state.forecast}/>;
         } else {
             displayWeekly = '';
         }
@@ -81,12 +80,46 @@ class DSSearch extends React.Component {
 }
 
 class DSWeekly extends React.Component {
+        /*
+        constructor(props) {
+            super(props);
+            
+        };
+    */
     render(){
+        var dotw = "";
+
+        switch(new Date(this.props.forecast.daily.data[1].time*1000).getDay()){
+                    case 0: 
+                        dotw = "Sunday";
+                        break;
+                    case 1:
+                        dotw = "Monday";
+                        break;
+                    case 2:
+                        dotw = "Tuesday";
+                        break;
+                    case 3:
+                        dotw = "Wednesday";
+                        break;
+                    case 4:
+                        dotw = "Thursday";
+                        break;
+                    case 5:
+                        dotw = "Friday";
+                        break;
+                    case 6:
+                        dotw = "Saturday";
+                        break;
+                    default:
+                        dotw = this.props.forecast.daily.data[1].time;
+                        break;
+                }
         return(
             <div className="container">
                 <h3>Course Forecast for: {this.props.name}</h3><h4>Bowling Green, OH</h4>
                 <Tile heading="Today" attr1="75 degrees" attr2="5-10 mph winds" attr3="20% chance of rain" attr4="Course Condition: Muddy" />
-                <Tile heading="Saturday" attr1="77 degrees" attr2="10-14 mph winds" attr3="15% chance of rain" attr4="Course Condition: Partially Flooded" />
+                <Tile heading={dotw} attr1="77 degrees" attr2="10-14 mph winds" attr3="15% chance of rain" attr4="Course Condition: Partially Flooded" />
                 <Tile heading="Sunday" attr1="79 degrees" attr2="3-8 mph winds" attr3="25% chance of rain" attr4="Course Condition: Muddy" />
                 <Tile heading="Monday" attr1="77 degrees" attr2="6-12 mph winds" attr3="40% chance of rain" attr4="Course Condition: Muddy" />
                 <Tile heading="Tuesday" attr1="77 degrees" attr2="6-12 mph winds" attr3="40% chance of rain" attr4="Course Condition: Muddy" />
