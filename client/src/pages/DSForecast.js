@@ -7,9 +7,7 @@ class DSForecast extends React.Component {
         return(
             <div>
                 <DSSearch />
-                <ol className="minutelyData">
 
-                </ol>
             </div>
         );
     }
@@ -108,7 +106,6 @@ class DSWeekly extends React.Component {
         }
     }
     render() {
-        var dotw = "";
         var vDaily = this.props.forecast.daily;
         
         return(
@@ -125,14 +122,6 @@ class DSWeekly extends React.Component {
                         attr5="None"
                     />
                 ))}
-                {/*<Tile heading="Today" attr1={Math.round(vDaily.data[0].temperatureMax)} attr2={Math.round(vDaily.data[0].temperatureMin)} attr3={Math.round(vDaily.data[0].windSpeed)} attr4={vDaily.data[0].precipProbability*100} attr5="None" />
-                <Tile heading={dotw} attr1="77 degrees" attr2="10-14 mph winds" attr3="15% chance of rain" attr4="Course Condition: Partially Flooded" />
-                <Tile heading="Sunday" attr1="79 degrees" attr2="3-8 mph winds" attr3="25% chance of rain" attr4="Course Condition: Muddy" />
-                <Tile heading="Monday" attr1="77 degrees" attr2="6-12 mph winds" attr3="40% chance of rain" attr4="Course Condition: Muddy" />
-                <Tile heading="Tuesday" attr1="77 degrees" attr2="6-12 mph winds" attr3="40% chance of rain" attr4="Course Condition: Muddy" />
-                <Tile heading="Wednesday" attr1="77 degrees" attr2="6-12 mph winds" attr3="40% chance of rain" attr4="Course Condition: Muddy" />
-                <Tile heading="Thursday" attr1="77 degrees" attr2="6-12 mph winds" attr3="40% chance of rain" attr4="Course Condition: Muddy" />
-                */}
             </div>
         );
     }
