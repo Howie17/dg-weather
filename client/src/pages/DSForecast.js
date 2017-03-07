@@ -1,5 +1,4 @@
 import React from 'react';
-//import ReactDOM from 'react';
 import '../Forecast.css';
 
 class DSForecast extends React.Component {  
@@ -35,24 +34,12 @@ class DSSearch extends React.Component {
         this.setState({isSearchClick: true});
         var textValue = this.state.value;                                                                  //todo: onError display error msg "Course not found." 
         var myRequest = new Request('/api/course/' + textValue);
-        //var output = '';
         var FORECAST = [];
         fetch(myRequest)
             .then(response => response.json())
             .then((json)=> {
                 FORECAST = json;
-                this.setState({forecast: FORECAST});
-                /*
-                for (var i = 0; i <= FORECAST.minutely.data.length; i++) {                              // Guide: https://www.youtube.com/watch?v=HWdLisBrlV8 array at 13:30
-                    for (var key in FORECAST.minutely.data[i]) {
-                        if (FORECAST.minutely.data[i].hasOwnProperty(key)) {
-                            output += '<li>' + FORECAST.minutely.data[i][key] + '</li>';
-                        }   // hasOwnProperty check
-                    }       //for each object
-                }           //for each array element
-                console.log(output);
-                */
-                
+                this.setState({forecast: FORECAST});               
             })
     }
     render(){
@@ -78,13 +65,7 @@ class DSSearch extends React.Component {
 }
 
 class DSWeekly extends React.Component {
-    /*
-    constructor(props) {
-        super(props);
-            this.props.forecast.daily = this.props.forecast.daily.bind(this);
 
-    };
-    */
     getDayOfTheWeek(day) {
         switch((new Date(day.time * 1000)).getDay()){
             case 0: 
@@ -138,12 +119,5 @@ function Tile(props) {
     </div>
   );
 }
-
-/*
-ReactDOM.render(
-    <DSForecast />,
-    document.getElementById('root')
-);
-*/
 
 export default DSForecast;
