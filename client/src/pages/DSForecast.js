@@ -87,59 +87,44 @@ class DSWeekly extends React.Component {
 
     };
     */
+    getDayOfTheWeek(day) {
+        switch((new Date(day.time * 1000)).getDay()){
+            case 0: 
+                return "Sunday";
+            case 1:
+                return "Monday";
+            case 2:
+                return "Tuesday";
+            case 3:
+                return "Wednesday";
+            case 4:
+                return "Thursday";
+            case 5:
+                return "Friday";
+            case 6:
+                return "Saturday";
+            default:
+                return "Today";
+        }
+    }
     render() {
         var dotw = "";
         var vDaily = this.props.forecast.daily;
-        var output = "";
         
-        for (var i = 0; i <= vDaily.data.length; i++) {                              // Guide: https://www.youtube.com/watch?v=HWdLisBrlV8 array at 13:30
-      //      for (var key in vDaily.data[i]) {
-      //          if (vDaily.data[i].hasOwnProperty(key)) {
-                    if (i === 0) {
-                        dotw = "Today";
-                    } else {
-                        switch(new Date(vDaily.data[i].time*1000).getDay()){
-                            case 0: 
-                                dotw = "Sunday";
-                                break;
-                            case 1:
-                                dotw = "Monday";
-                                break;
-                            case 2:
-                                dotw = "Tuesday";
-                                break;
-                            case 3:
-                                dotw = "Wednesday";
-                                break;
-                            case 4:
-                                dotw = "Thursday";
-                                break;
-                            case 5:
-                                dotw = "Friday";
-                                break;
-                            case 6:
-                                dotw = "Saturday";
-                                break;
-                            default:
-                                dotw = "Today";
-                                break;
-                        }
-                    }
-                                        
-                    // .data[i][key]
-                    output += <Tile heading={dotw} attr1={Math.round(vDaily.data[i].temperatureMax)} attr2={Math.round(vDaily.data[i].temperatureMin)} attr3={Math.round(vDaily.data[i].windSpeed)} attr4={vDaily.data[i].precipProbability*100} attr5="None" />;
-      //          }   // hasOwnProperty check
-      //      }       //for each object
-        }           //for each array element
-console.log(output);
-        
-
-
-
         return(
             <div className="container">
                 <h3>Course Forecast for: {this.props.name}</h3><h4>Bowling Green, OH</h4>
-                {output}
+                {vDaily.data.map((day, index)=> (
+                    <Tile
+                        key={index} // Needed when returning a list of components in a loop
+                        heading={index === 0 ? "Today" : this.getDayOfTheWeek(day)}
+                        attr1={Math.round(day.temperatureMax)}
+                        attr2={Math.round(day.temperatureMin)}
+                        attr3={Math.round(day.windSpeed)}
+                        attr4={day.precipProbability*100}
+                        attr5="None"
+                    />
+                ))}
                 {/*<Tile heading="Today" attr1={Math.round(vDaily.data[0].temperatureMax)} attr2={Math.round(vDaily.data[0].temperatureMin)} attr3={Math.round(vDaily.data[0].windSpeed)} attr4={vDaily.data[0].precipProbability*100} attr5="None" />
                 <Tile heading={dotw} attr1="77 degrees" attr2="10-14 mph winds" attr3="15% chance of rain" attr4="Course Condition: Partially Flooded" />
                 <Tile heading="Sunday" attr1="79 degrees" attr2="3-8 mph winds" attr3="25% chance of rain" attr4="Course Condition: Muddy" />
