@@ -35,12 +35,16 @@ class DSSearch extends React.Component {
         var textValue = this.state.value;                                                                  //todo: onError display error msg "Course not found." 
         var myRequest = new Request('/api/course/' + textValue);
         var FORECAST = [];
-        fetch(myRequest)
-            .then(response => response.json())
-            .then((json)=> {
-                FORECAST = json;
-                this.setState({forecast: FORECAST});               
-            })
+        if (textValue === "") {
+            console.log("Error: Course does not exist.")
+        } else {
+            fetch(myRequest)
+                .then(response => response.json())
+                .then((json)=> {
+                    FORECAST = json;
+                    this.setState({forecast: FORECAST});               
+                })
+        }
     }
     render(){
         var displayWeekly = '';
@@ -99,7 +103,7 @@ class DSWeekly extends React.Component {
                         attr1={Math.round(day.temperatureMax)}
                         attr2={Math.round(day.temperatureMin)}
                         attr3={Math.round(day.windSpeed)}
-                        attr4={day.precipProbability*100}
+                        attr4={Math.round(day.precipProbability*100)}
                         attr5="None"
                     />
                 ))}
