@@ -31,7 +31,7 @@ router.route('/course/Carter%20Park')
 
 function fetchForecast(gpsCords, res) {
     var apiKey = "d3854c7200b744d3ae89e8bd1382e4d5";
-    var gpsCords = "41.368457,-83.6244568"      //Hardcoded Carter Park, Bowling Green, OH
+    var gpsCords = "41.368457,-83.6244568"      //Hardcoded Carter Park, Bowling Green
     var myRequest = "https://api.darksky.net/forecast/" + apiKey + gpsCords
     
     fetch(myRequest)
