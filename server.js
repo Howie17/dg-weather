@@ -23,15 +23,25 @@ router.use(function(req, res, next){
     next();
 });
 
-router.get('/', function(req, res) {
-    res.json({message: 'Hooray! Welcome to our api!'});
-});
-
 router.route('/course/Carter%20Park')
 
     .get(function(req, res) {
         res.sendFile(path.normalize(__dirname + '/courses/carter park.json'));
     })
+
+function fetchForecast(gpsCords, res) {
+    var apiKey = "d3854c7200b744d3ae89e8bd1382e4d5";
+    var gpsCords = "41.368457,-83.6244568"      //Hardcoded Carter Park, Bowling Green, OH
+    var myRequest = "https://api.darksky.net/forecast/" + apiKey + gpsCords
+    
+    fetch(myRequest)
+                .then(response => response.json())
+                .then((json)=> {
+                    //Save json forecast once received.
+                    //Create logfile to timestamp most recent forecast received for each course?
+                        //Create condition for fetching based on when last fetched ~5 min?
+                })
+}
 
 // Register routes
 app.use('/api', router);
