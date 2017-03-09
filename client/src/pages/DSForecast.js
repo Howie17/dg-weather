@@ -30,11 +30,11 @@ class DSSearch extends React.Component {
         this.setState({value: event.target.value});
     }
 
-    handleSearchClick() {
+    handleSearchClick(e) {
         this.setState({isSearchClick: true});
-        var textValue = this.state.value;                                                                  //todo: onError display error msg "Course not found." 
-        var myRequest = new Request('/api/course/' + textValue);
-        var FORECAST = [];
+        let textValue = this.state.value;                                                                  //todo: onError display error msg "Course not found." 
+        let myRequest = new Request('/api/course/' + textValue);
+        let FORECAST = [];
         if (textValue === "") {
             console.log("Error: Course does not exist.")
         } else {
@@ -45,9 +45,10 @@ class DSSearch extends React.Component {
                     this.setState({forecast: FORECAST});               
                 })
         }
+        e.preventDefault();
     }
     render(){
-        var displayWeekly = '';
+        let displayWeekly = '';
         if (this.state.isSearchClick) {
             displayWeekly = <DSWeekly name={this.state.value} forecast={this.state.forecast}/>;
         } else {
@@ -56,9 +57,9 @@ class DSSearch extends React.Component {
         
         return (
             <div>
-                <form>
+                <form onSubmit={this.handleSearchClick}>
                     <input type="text" placeholder="Course Search..." value={this.state.value} onChange={this.handleTextChange} />
-                    <button className="reqForecast" onClick={this.handleSearchClick}>Search</button>
+                    <button className="reqForecast">Search</button>
                 </form>
                 <div className="Weekly">
                     {displayWeekly}
@@ -91,7 +92,7 @@ class DSWeekly extends React.Component {
         }
     }
     render() {
-        var vDaily = this.props.forecast.daily;
+        let vDaily = this.props.forecast.daily;
         
         return(
             <div className="container">

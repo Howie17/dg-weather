@@ -1,47 +1,63 @@
-/*
-const express = require('express');
-const fs = require('fs');
-
-const app = express();
-
-app.set('port', (process.env.PORT || 3001));
-
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-}
-*/
-
 var express = require('express');
 var app = express();
 var path = require('path');
 var port = process.env.PORT || 3001; //set our port
-
+var fs = require('fs');
+var request = require('request');
 var router = express.Router();
 
 router.use(function(req, res, next){
     console.log('Something is happening.');
+    
     next();
 });
 
-router.route('/course/Carter%20Park')
-
+router.route('/course/:coursename')
+    
     .get(function(req, res) {
-        res.sendFile(path.normalize(__dirname + '/courses/carter park.json'));
+        fetchForecast(req, res);
+        
     })
 
-function fetchForecast(gpsCords, res) {
-    var apiKey = "";
-    var gpsCords = "41.368457,-83.6244568"      //Hardcoded Carter Park, Bowling Green
-    var myRequest = "https://api.darksky.net/forecast/" + apiKey + gpsCords
-    
+
+function fetchForecast(req, res) {                                                                 //Pull new forecast for the request
+    let apiKey = "";
+    let gpsCords = "41.368457,-83.6244568";      //Hardcoded Carter Park, Bowling Green
+    let myRequest = "https://api.darksky.net/forecast/" + apiKey + "/" + gpsCords;
+    let courseName = req.params.coursename;
+
+    request(myRequest, function(error, response, body){
+        if (error) {
+            console.log('error:', error)
+            console.log('statusCode:', response && response.statusCode);
+            console.log('body:', body);
+        } else {
+            fs.writeFile(__dirname + "/courses/" + courseName + ".json", body, function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+                res.sendFile(path.normalize(__dirname + '/courses/' + req.params.coursename + '.json'));
+                console.log("The forecast was saved for " + courseName + "!");
+            })
+        }
+    })
+    };
+/*
     fetch(myRequest)
-                .then(response => response.json())
-                .then((json)=> {
-                    //Save json forecast once received.
-                    //Create logfile to timestamp most recent forecast received for each course?
-                        //Create condition for fetching based on when last fetched ~5 min?
-                })
-}
+        .then(response => response.json())
+        .then((json)=> {
+            console.log("Writing course forecast to " + req.params + "file.");
+            fs.writeFile("/courses/" + req.params + ".json", json, function(err) {          //Save json forecast once received.
+                if(err) {
+                    return console.log(err);
+                }
+                console.log("The forecast was saved!");
+            })
+            
+            //Create logfile to timestamp most recent forecast received for each course?
+                //Create condition for fetching based on when last fetched ~5 min?
+        })
+*/
 
 // Register routes
 app.use('/api', router);

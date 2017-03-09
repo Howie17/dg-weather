@@ -20,7 +20,7 @@ const app = document.getElementById('app');
 ReactDOM.render(
         <Router history={hashHistory}>
             <Route path="/" component={Layout}>
-                <IndexRoute component={CourseSearchForecast}></IndexRoute>
+                <IndexRoute component={DSForecast}></IndexRoute>
                 <Route path="coursesearchforecast" component={CourseSearchForecast}></Route>
                 {/*
                 <Route path="playablebyday" component={PlayableByDay}></Route>
