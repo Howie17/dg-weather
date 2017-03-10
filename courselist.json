@@ -1,0 +1,51 @@
+{
+    "courses":[
+        {
+            "courseName": "Carter Park",
+            "latitude": 41.368457,
+            "longitude": -83.6244568,
+            "city": "Bowling Green",
+            "state": "Ohio",
+            "timezone": "America/New_York",
+            "offset":-5
+        },
+        {
+            "courseName": "Ottawa Park",
+            "latitude": 41.665359, 
+            "longitude": -83.592648,
+            "city": "Toledo",
+            "state": "Ohio",
+            "timezone": "America/New_York",
+            "offset":-5
+        },
+        {
+            "courseName": "Woodlands Park",
+            "latitude": 41.561462,
+            "longitude": -83.611364,
+            "city": "Perrysburg",
+            "state": "Ohio",
+            "timezone": "America/New_York",
+            "offset":-5
+        },
+        {
+            "courseName": "Vienna Park",
+            "latitude": 41.788807,
+            "longitude": -83.542428,
+            "city": "Temperance",
+            "state": "Michigan",
+            "timezone": "America/New_York",
+            "offset":-5
+        },
+        {
+            "courseName": "Parmalee Park",
+            "latitude": 41.768437,
+            "longitude": -83.632915,
+            "city": "Lambertville",
+            "state": "Michigan",
+            "timezone": "America/New_York",
+            "offset":-5
+        }
+    ]
+
+}
+

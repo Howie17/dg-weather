@@ -8,21 +8,26 @@ var router = express.Router();
 
 router.use(function(req, res, next){
     console.log('Something is happening.');
-    
     next();
 });
 
 router.route('/course/:coursename')
     
     .get(function(req, res) {
-        fetchForecast(req, res);
-        
+        fetchForecast(req, res);                                                                   //Create conditional: 
     })
+
+function courseGpsCords(req, res) {
+    //let couresList = JSON.parse(__dirname, "courselist.json");
+    //console.log(courseList);
+    //gpsCords = courseList.courses + "." + req.params.coursename + 
+}
 
 
 function fetchForecast(req, res) {                                                                 //Pull new forecast for the request
-    let apiKey = "";
-    let gpsCords = "41.368457,-83.6244568";      //Hardcoded Carter Park, Bowling Green
+    let apiKey = "9d007da7fea4783f30a871a05b48c74f";
+    let gpsCords = "41.368457,-83.6244568";                                                        //Carter Park hardcoded
+    courseGpsCords();                                                        
     let myRequest = "https://api.darksky.net/forecast/" + apiKey + "/" + gpsCords;
     let courseName = req.params.coursename;
 
