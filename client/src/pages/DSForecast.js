@@ -50,7 +50,7 @@ class DSSearch extends React.Component {
     render(){
         let displayWeekly = '';
         if (this.state.isSearchClick) {
-            displayWeekly = <DSWeekly name={this.state.value} forecast={this.state.forecast}/>;
+            displayWeekly = <DSWeekly name={this.state.value} forecast={this.state.forecast}/>;                                 //todo: name should equal the json id returned
         } else {
             displayWeekly = '';
         }
@@ -96,8 +96,8 @@ class DSWeekly extends React.Component {
         
         return(
             <div className="container">
-                <h3>Course Forecast for: {this.props.name}</h3><h4>Bowling Green, OH</h4>
-                {vDaily.data.map((day, index)=> (
+                <h3>Course Forecast for: {this.props.name}</h3><h4>Bowling Green, OH</h4> {/* todo: this.props.name shouldn't update based on text input, but what is returned via json */}
+                {vDaily.data.map((day, index)=> (                                         /* todo: benign error, this line is called before forecast is populated, throwing an uncaught undefined error. */
                     <Tile
                         key={index} // Needed when returning a list of components in a loop
                         heading={index === 0 ? "Today" : this.getDayOfTheWeek(day)}
