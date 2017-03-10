@@ -115,7 +115,7 @@ class DSWeekly extends React.Component {
 
 function Tile(props) {
   return (
-    <div className="tile">                                  {/* Cleanup Steps: could convert the attributes into a loop */}
+    <div className="tile">                                  
         <h3>{props.heading}</h3>                            {/* tile heading: for dg-weather = course name in playable forecast, otherwise blank as the course name is displayed elsewhere (parent usually) */}
         <p>High: {props.attr1} Low: {props.attr2}</p>       {/* Attribute 1 & 2: for dg-weather = Hi/Low temperature */}
         <p>{props.attr3} mph</p>                            {/* Attribute 3: for dg-weather = wind */}
