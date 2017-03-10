@@ -6,7 +6,7 @@ class Footer extends React.Component {
 
         return (
             <div className="Footer">
-                <p>Powered by <a href="https://darksky.net/poweredby/">Dark Sky</a></p>
+                <p>Powered by <a href="https://darksky.net/poweredby/">Dark Sky</a>.</p>
             </div>
         );
     }

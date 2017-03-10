@@ -16,3 +16,13 @@
     width: 25px;
     margin: 10px;
 }
+
+p {
+    font-size: 10pt;
+}
+
+a {
+    font-style: oblique;
+    font-size: 10pt;
+    font-weight: bold;
+}

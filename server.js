@@ -29,43 +29,28 @@ function checkLastUpdate(req, res){
         courseName = req.params.coursename.toLowerCase();
         if (courseList.hasOwnProperty(courseName)){
             let reqCourse = courseList[courseName];
-            console.log("current time: " + (new Date().getTime() / 1000));                          //converting current time from miliseconds to seconds
+            console.log("current time: " + (new Date().getTime() / 1000));                          //converting current time from miliseconds to seconds for comparison to darksky api timestamp (seconds)
             console.log("Last update was: " + reqCourse.lastupdate);
             console.log("Time difference = " + (((new Date().getTime() / 1000) - reqCourse.lastupdate) / 60) + " minutes.");
-            if ((new Date().getTime() / 18000) > (reqCourse.lastupdate + 10)){                               //if request received within 18000s (5 hours) of last, dont fetch new forecast
+            if ((new Date().getTime() / 18000) > (reqCourse.lastupdate + 10)){                      //if request received within 18000s (5 hours) of last, dont fetch new forecast
                 //Most recent forecast is outdated, fetch new forecast
                 fetchForecast(req, res);
             } else {
                 console.log("No new forecast for requested course.");
+                res.sendFile(path.normalize(__dirname + '/courses/' + req.params.coursename + '.json'));
+                console.log("Most recent forecast sent for the requested course.");
             }
         } else {
-            console.log("*Course does not exist. Please check spelling and try again.");             //todo: Output this to the client's screen below textbox (font=red).
+            console.log("*Course does not exist. Please check spelling and try again.");            //todo: Output this to the client's screen below textbox (font=red). +add autocomplete to textbox
         }
         
     })
 }
 
-function courseGpsCords(req, gpsCords) {
-    let courseList = JSON.parse(fs.readFileSync("courselist.json"));
-    /*
-    console.log(courseList[req.params.coursename]);
-    console.log(courseList[req.params.coursename].latitude);
-    console.log(courseList[req.params.coursename].longitude);
-    console.log(courseList[req.params.coursename].latitude + ", " + courseList[req.params.coursename].longitude);
-    */
-    gpsCords = courseList[req.params.coursename].latitude + ", " + courseList[req.params.coursename].longitude;
-    
-    console.log(gpsCords);
-    //console.log(courseList);
-    //gpsCords = courseList.courses + "." + req.params.coursename + 
-    //fetchForecast(req, res);
-}
-
 //Pull new forecast for the request
 function fetchForecast(req, res) {                                                                 
-    let apiKey = "9d007da7fea4783f30a871a05b48c74f";
+    let apiKey = "";
     let gpsCords = "";
-    // courseGpsCords(req, res);
     let courseList = JSON.parse(fs.readFileSync("courselist.json"));
     gpsCords = courseList[req.params.coursename].latitude + ", " + courseList[req.params.coursename].longitude;
     let myRequest = "https://api.darksky.net/forecast/" + apiKey + "/" + gpsCords;
@@ -89,7 +74,6 @@ function fetchForecast(req, res) {
                 const store = JSON.parse(fs.readFileSync("courselist.json"));
                 store[req.params.coursename].lastupdate = (Math.round(new Date().getTime() / 1000));
                 fs.writeFileSync("courselist.json", JSON.stringify(store,null,2));
-                //console.log("lastupdate timestamp for " + courseName + " was updated within courselist.json.");
             })
         }
     })
