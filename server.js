@@ -37,7 +37,7 @@ function fetchForecast(req, res) {                                              
                     return console.log(err);
                 }
                 res.sendFile(path.normalize(__dirname + '/courses/' + req.params.coursename + '.json'));
-                console.log("The forecast was saved for " + courseName + "!");
+                console.log("A forecast was saved for " + courseName + "!");
             })
         }
     })
