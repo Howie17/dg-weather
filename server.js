@@ -1,10 +1,11 @@
-var express = require('express');
-var app = express();
-var path = require('path');
-var port = process.env.PORT || 3001; //set our port
-var fs = require('fs');
-var request = require('request');
-var router = express.Router();
+var express = require('express'),
+    app = express(),
+    path = require('path'),
+    port = process.env.PORT || 3001, //set our port
+    fs = require('fs'),
+    request = require('request'),
+    compression = require('compression'),
+    router = express.Router();
 
 
 router.use(function(req, res, next){
@@ -32,7 +33,7 @@ function checkLastUpdate(req, res){
             console.log("current time: " + (new Date().getTime() / 1000));                          //converting current time from miliseconds to seconds for comparison to darksky api timestamp (seconds)
             console.log("Last update was: " + reqCourse.lastupdate);
             console.log("Time difference = " + (((new Date().getTime() / 1000) - reqCourse.lastupdate) / 60) + " minutes.");
-            if ((new Date().getTime() / 18000) > (reqCourse.lastupdate + 10)){                      //if request received within 18000s (5 hours) of last, dont fetch new forecast
+            if ((new Date().getTime() / 1000) > (reqCourse.lastupdate + 18000)){                      //if request received within 18000s (5 hours) of last, dont fetch new forecast
                 //Most recent forecast is outdated, fetch new forecast
                 fetchForecast(req, res);
             } else {
@@ -53,7 +54,7 @@ function fetchForecast(req, res) {
     let gpsCords = "";
     let courseList = JSON.parse(fs.readFileSync("courselist.json"));
     gpsCords = courseList[req.params.coursename].latitude + ", " + courseList[req.params.coursename].longitude;
-    let myRequest = "https://api.darksky.net/forecast/" + apiKey + "/" + gpsCords;
+    let myRequest = "https://api.darksky.net/forecast/" + apiKey + "/" + gpsCords + "?extend=hourly";
     let courseName = req.params.coursename;
     console.log(myRequest);
 

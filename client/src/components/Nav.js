@@ -10,7 +10,7 @@ class Nav extends React.Component {
                 Display Modes:
                 {/*
                 <Link to="PlayableByDay"><button className="button">Playable Courses by Day</button></Link> | 
-                */}
+                
                 <Link to="CourseSearchForecast"><button className="button">Course Search Forecast</button></Link> | 
                 {/*
                 <Link to="/"><button className="button">Playable Forecast</button></Link> | 
