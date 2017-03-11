@@ -50,7 +50,7 @@ function checkLastUpdate(req, res){
 
 //Pull new forecast for the request
 function fetchForecast(req, res) {                                                                 
-    let apiKey = "";
+    let apiKey = "9d007da7fea4783f30a871a05b48c74f";
     let gpsCords = "";
     let courseList = JSON.parse(fs.readFileSync("courselist.json"));
     gpsCords = courseList[req.params.coursename].latitude + "," + courseList[req.params.coursename].longitude;
