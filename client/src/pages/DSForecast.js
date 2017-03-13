@@ -35,18 +35,9 @@ class DSSearch extends React.Component {
     handleSearchClick(e) {
         this.setState({isSearchClick: true});
         let textValue = this.state.value;                                                                  //todo: onError display error msg "Course not found." 
-        //let myRequest = new Request('/api/course/' + textValue);
-        //let FORECAST = [];
         if (textValue === "") {
             console.log("Error: Course does not exist.")
         } else {
-            /*fetch(myRequest)
-                .then(response => response.json())
-                .then((json)=> {
-                    FORECAST = json;
-                    this.setState({forecast: FORECAST});               
-                })
-                */
             getCourse(textValue).then(forecast => this.setState({ forecast }));
         }
         e.preventDefault();
@@ -70,7 +61,7 @@ class DSSearch extends React.Component {
                 </form>
                 <div className="Weekly">
                     {displayWeekly}
-                    {/*displayHourly*/}
+                    {displayHourly}
                 </div>
             </div>
         );
@@ -158,13 +149,11 @@ class DSHourly extends React.Component {
     }
     */
     render() {
-        //console.log(this.props.forecast.hourly);
-        //let vHourly = this.props.forecast.hourly;
-        //console.log(vHourly);
+        let vHourly = this.props.forecast.hourly;
         return(
             <div className="container">
-               {/* <h3>Course Forecast for: {this.props.name}</h3><h4>City, State</h4>          todo: this.props.name shouldn't update based on text input, but what is returned via json */}
-                {/*{vHourly.data.map((hour, index)=> (                                           // todo: benign error, this line is called before forecast is populated, throwing an uncaught undefined error.
+                <h3>Hourly Forecast for: {this.props.name}</h3><h4>City, State</h4>         {/* todo: this.props.name shouldn't update based on text input, but what is returned via json */}
+                {vHourly && vHourly.data.map((hour, index)=> (                                           // todo: benign error, this line is called before forecast is populated, throwing an uncaught undefined error.
                     <Row
                         key={index}                                                         // Needed when returning a list of components in a loop
                         attr1={hour.time}                                                   //todo: convert unix time to hour
@@ -176,12 +165,12 @@ class DSHourly extends React.Component {
                         attr7={hour.humidity}
                         attr8={hour.summary}
                     />
-                ))} */}
+                ))}
             </div>
         );
     }
 }
-/*
+
 function Row(props) {
     return (
         <div className="row">                                  
@@ -192,13 +181,13 @@ function Row(props) {
                 Temp:{props.attr2} &#x2109; | 
                 Feels: {props.attr3} &#x2109; | 
                 Wind: {props.attr4} mph | 
-                {props.attr5 } % chance of rain | 
+                {props.attr5 }% chance of rain | 
                 {props.attr6} rainfall(in) | 
                 {Math.round(props.attr7*100)}
             </p>
         </div>
     );
 }
-*/
+
 export default DSForecast;
 

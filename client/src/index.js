@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './App';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Router, Route, IndexRoute, hashHistory} from 'react-router';
 import './index.css';
 
@@ -15,6 +16,8 @@ import Preferences from './pages/Preferences';
 */
 import DSForecast from './pages/DSForecast'
 
+
+injectTapEventPlugin();
 
 const app = document.getElementById('app');
 ReactDOM.render(
