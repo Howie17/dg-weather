@@ -105,7 +105,7 @@ class DSWeekly extends React.Component {
         return(
             <div className="container">
                 <h3>Course Forecast for: {this.props.name}</h3><h4>City, State</h4>         {/* todo: this.props.name shouldn't update based on text input, but what is returned via json */}
-                {vDaily.data.map((day, index)=> (                                           /* todo: benign error, this line is called before forecast is populated, throwing an uncaught undefined error. */
+                {vDaily && vDaily.data.map((day, index)=> (                                           /* todo: benign error, this line is called before forecast is populated, throwing an uncaught undefined error. */
                     <Tile
                         key={index}                                                         // Needed when returning a list of components in a loop
                         heading={index === 0 ? "Today" : this.getDayOfTheWeek(day)}
