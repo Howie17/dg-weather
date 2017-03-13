@@ -32,17 +32,22 @@ class DSSearch extends React.Component {
     handleSearchClick(e) {
         this.setState({isSearchClick: true});
         let textValue = this.state.value;                                                                  //todo: onError display error msg "Course not found." 
-        let myRequest = new Request('/api/course/' + textValue);
-        let FORECAST = [];
+        //let myRequest = new Request('/api/course/' + textValue);
+        //let FORECAST = [];
         if (textValue === "") {
             console.log("Error: Course does not exist.")
         } else {
-            fetch(myRequest)
+            /*fetch(myRequest)
                 .then(response => response.json())
                 .then((json)=> {
                     FORECAST = json;
                     this.setState({forecast: FORECAST});               
                 })
+                */
+            getCourse(textValue);
+                json=>{
+                this.setState({forecast: json});
+            }
         }
         e.preventDefault();
     }
@@ -65,7 +70,7 @@ class DSSearch extends React.Component {
                 </form>
                 <div className="Weekly">
                     {displayWeekly}
-                    {displayHourly}
+                    {/*displayHourly*/}
                 </div>
             </div>
         );
