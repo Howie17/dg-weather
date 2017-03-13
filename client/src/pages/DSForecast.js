@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { getCourse } from '../lib/api';
+
 import '../Forecast.css';
 
 class DSForecast extends React.Component {  
@@ -44,10 +47,7 @@ class DSSearch extends React.Component {
                     this.setState({forecast: FORECAST});               
                 })
                 */
-            getCourse(textValue);
-                json=>{
-                this.setState({forecast: json});
-            }
+            getCourse(textValue).then(forecast => this.setState({ forecast }));
         }
         e.preventDefault();
     }

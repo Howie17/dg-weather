@@ -4,6 +4,7 @@
   "description": "Base setup for node.js express and react.",
   "main": "index.js",
   "scripts": {
+    "postinstall": "cd client && npm install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "babel-node server.js",
@@ -17,7 +18,8 @@
     "compression": "^1.6.2",
     "express": "^4.14.1",
     "fs": "0.0.1-security",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "concurrently": "^3.3.0"
