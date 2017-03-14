@@ -1,6 +1,6 @@
 {
   "name": "react-express-base",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Base setup for node.js express and react.",
   "main": "index.js",
   "scripts": {
