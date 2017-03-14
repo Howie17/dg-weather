@@ -8,4 +8,4 @@ This file magically becomes the landing page documentation for your project
 ## Development Steps
 1. pull down or clone this repo
 2. `npm install`
-3. 'npm start`
+3. `npm start`
