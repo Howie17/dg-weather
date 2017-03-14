@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './App';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Router, Route, IndexRoute, hashHistory} from 'react-router';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import './index.css';
 
 //Pages
@@ -21,15 +24,17 @@ injectTapEventPlugin();
 
 const app = document.getElementById('app');
 ReactDOM.render(
-        <Router history={hashHistory}>
-            <Route path="/" component={Layout}>
-                <IndexRoute component={DSForecast}></IndexRoute>
-                <Route path="coursesearchforecast" component={CourseSearchForecast}></Route>
-                {/*
-                <Route path="playablebyday" component={PlayableByDay}></Route>
-                <Route path="preferences" component={Preferences}></Route>
-                */}
-                <Route path="dsforecast" component={DSForecast}></Route> 
-            </Route>
-        </Router>, 
+        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+            <Router history={hashHistory}>
+                <Route path="/" component={Layout}>
+                    <IndexRoute component={DSForecast}></IndexRoute>
+                    <Route path="coursesearchforecast" component={CourseSearchForecast}></Route>
+                    {/*
+                    <Route path="playablebyday" component={PlayableByDay}></Route>
+                    <Route path="preferences" component={Preferences}></Route>
+                    */}
+                    <Route path="dsforecast" component={DSForecast}></Route> 
+                </Route>
+            </Router>
+        </MuiThemeProvider>, 
 app);
