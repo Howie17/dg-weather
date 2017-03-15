@@ -6,7 +6,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1489461929
+    "lastupdate": 1489549865
   },
   "ottawa park": {
     "latitude": 41.665359,
@@ -42,6 +42,6 @@
     "state": "Michigan",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1489425043
+    "lastupdate": 1489550334
   }
 }
