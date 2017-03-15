@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Nav.css';
+import {hashHistory} from 'react-router';
 //import { Link } from 'react-router';
 //import { getCourse } from '../lib/api';
 
@@ -32,6 +33,28 @@ class Nav extends React.Component {
 }
 
 class SearchField extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleSearchClick = this.handleSearchClick.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
+        this.setState = this.setState.bind(this);
+        this.state = {
+            value: '',
+        };
+        
+    }
+    handleTextChange(event) {
+        this.setState({value: event.target.value});
+    }
+    handleSearchClick(e) {
+        let textValue = this.state.value;                                                                  //todo: onError display error msg "Course not found." 
+        if (textValue === "") {
+            console.log("Error: Course does not exist.")
+        } else {
+            hashHistory.push('weekly/' + textValue);
+        }
+        e.preventDefault();
+    }
 
     render() {
         const styles = {
@@ -56,15 +79,19 @@ class SearchField extends React.Component {
         };
             
         return (
-            <TextField 
-                className="searchField" 
-                hintText="Search" 
-                hintStyle={styles.hintStyle}
-                floatingLabelStyle={styles.floatingLabelStyle}
-                inputStyle={styles.textField}
-                underlineStyle={styles.underlineStyle} 
-                underlineFocusStyle={styles.underlineFocusStyle}
-            />
+            <form onSubmit={this.handleSearchClick}>
+                <TextField 
+                    className="searchField" 
+                    hintText="Search" 
+                    hintStyle={styles.hintStyle}
+                    floatingLabelStyle={styles.floatingLabelStyle}
+                    inputStyle={styles.textField}
+                    underlineStyle={styles.underlineStyle} 
+                    underlineFocusStyle={styles.underlineFocusStyle}
+                    value={this.state.value}
+                    onChange={this.handleTextChange}
+                />
+            </form>
         );
     }
 }
