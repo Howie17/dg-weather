@@ -9,15 +9,15 @@ import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import './index.css';
 
 //Pages
-import CourseSearchForecast from './pages/CourseSearchForecast';
 import Layout from './components/Layout';
-
+import CurrentView from './pages/CurrentView.js';
+import CourseForecast from './pages/CourseForecast.js';
 /*
 import PlayableByDay from './pages/PlayableByDay';
 import PlayableForecast from './pages/PlayableForecast';
 import Preferences from './pages/Preferences';
 */
-import DSForecast from './pages/DSForecast'
+
 
 
 injectTapEventPlugin();
@@ -27,13 +27,10 @@ ReactDOM.render(
         <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
             <Router history={hashHistory}>
                 <Route path="/" component={Layout}>
-                    <IndexRoute component={DSForecast}></IndexRoute>
-                    <Route path="coursesearchforecast" component={CourseSearchForecast}></Route>
-                    {/*
-                    <Route path="playablebyday" component={PlayableByDay}></Route>
-                    <Route path="preferences" component={Preferences}></Route>
-                    */}
-                    <Route path="dsforecast" component={DSForecast}></Route> 
+                    <IndexRoute component={CurrentView} />
+                    <Route path="weekly">
+                        <Route path=":courseName" component={CourseForecast}></Route>
+                    </Route>
                 </Route>
             </Router>
         </MuiThemeProvider>, 
