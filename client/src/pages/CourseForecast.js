@@ -1,7 +1,12 @@
 import React from 'react';
 
 import { getCourse } from '../lib/api';
-
+/*
+import { GridList, GridTile } from 'material-ui/GridList';
+import IconButton from 'material-ui/IconButton';
+import Subheader from 'material-ui/Subheader';
+import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+*/
 import '../Forecast.css';
 
 class CourseForecast extends React.Component {  
@@ -14,9 +19,10 @@ class CourseForecast extends React.Component {
         };
     }
 
-    componentDidMount(){                                                                    //https://facebook.github.io/react/docs/react-component.html#componentwillmount
+    componentWillReceiveProps(){     
         let textValue = this.props.routeParams.courseName;
         getCourse(textValue).then(forecast => this.setState({ forecast }));
+        console.log("Forecast received.");
         //todo: onError display error msg "Course not found."
     }
 
@@ -55,7 +61,7 @@ class DSWeekly extends React.Component {
     }
     render() {
         let vDaily = this.props.forecast.daily;
-        
+        console.log(vDaily);
         return(
             <div className="container">
                 <h3>Course Forecast for: {this.props.name}</h3><h4>City, State</h4>         {/* todo: this.props.name shouldn't update based on text input, but what is returned via json */}
@@ -89,28 +95,6 @@ function Tile(props) {
 
 class DSHourly extends React.Component {
 
-    /*
-    getMornNight(hour) {
-        switch((new Date(hour.time * 1000)).getHours()){
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-            case 12: 
-                return "AM";
-            default:
-                return "PM";
-        }
-    }
-    */
     render() {
         let vHourly = this.props.forecast.hourly;
         return(
@@ -127,6 +111,7 @@ class DSHourly extends React.Component {
                         attr6={Math.round(hour.precipIntensity)}
                         attr7={hour.humidity}
                         attr8={hour.summary}
+                        attr9={ (new Date(hour.time * 1000)).getHours() <= 12 ? "AM" : "PM"}
                     />
                 ))}
             </div>
@@ -139,7 +124,7 @@ function Row(props) {
         <div className="row">                                  
             <h3>{props.attr1}</h3>
             <p> 
-                {props.attr1}(AM/PM) | 
+                {props.attr1} {props.attr9} | 
                 {props.attr8} | 
                 Temp:{props.attr2} &#x2109; | 
                 Feels: {props.attr3} &#x2109; | 
