@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { getCourse } from '../lib/api';
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 /*
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
@@ -31,7 +32,22 @@ class CourseForecast extends React.Component {
         return(
             <div>
                 <DSWeekly name={this.state.value} forecast={this.state.forecast}/>          {/*todo: name should equal the json id returned*/}
-                <DSHourly forecast={this.state.forecast}/>
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHeaderColumn>Time</TableHeaderColumn>
+                            <TableHeaderColumn>Summary</TableHeaderColumn>
+                            <TableHeaderColumn>Temperature</TableHeaderColumn>
+                            <TableHeaderColumn>Feels</TableHeaderColumn>
+                            <TableHeaderColumn>Wind</TableHeaderColumn>
+                            <TableHeaderColumn>Chance of Rain</TableHeaderColumn>
+                            <TableHeaderColumn>Humidity</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        <DSHourly forecast={this.state.forecast}/>
+                    </TableBody>
+                </Table>  
             </div>
         );
     }
@@ -61,7 +77,7 @@ class DSWeekly extends React.Component {
     }
     render() {
         let vDaily = this.props.forecast.daily;
-        console.log(vDaily);
+        //console.log(vDaily);
         return(
             <div className="container">
                 <h3>Course Forecast for: {this.props.name}</h3><h4>City, State</h4>         {/* todo: this.props.name shouldn't update based on text input, but what is returned via json */}
@@ -133,7 +149,6 @@ class DSHourly extends React.Component {
         
         return(
             <div className="container">
-                <h3>Hourly Forecast for: {this.props.name}</h3><h4>City, State</h4>         {/* todo: this.props.name shouldn't update based on text input, but what is returned via json */}
                 {vHourly && vHourly.data.map((hour, index)=> (           
                     <Row
                         key={index}                                                         // Needed when returning a list of components in a loop
@@ -149,25 +164,24 @@ class DSHourly extends React.Component {
                     />
                 ))}
             </div>
+
         );
     }
 }
 
 function Row(props) {
+
     return (
-        <div className="row">                                  
-            <h3>{props.attr1}:00</h3>
-            <p> 
-                {props.attr1}:00 {props.attr9} | 
-                {props.attr8} | 
-                Temp:{props.attr2} &#x2109; | 
-                Feels: {props.attr3} &#x2109; | 
-                Wind: {props.attr4} mph | 
-                {props.attr5 }% chance of rain | 
-                {props.attr6} rainfall(in) | 
-                {Math.round(props.attr7*100)}
-            </p>
-        </div>
+            <TableRow>
+                <TableRowColumn>{props.attr1}:00 {props.attr9}</TableRowColumn>
+                <TableRowColumn>{props.attr8}</TableRowColumn>
+                <TableRowColumn>{props.attr2} &#x2109;</TableRowColumn>
+                <TableRowColumn>{props.attr3} &#x2109;</TableRowColumn>
+                <TableRowColumn>{props.attr4} mph</TableRowColumn>
+                <TableRowColumn>{props.attr5 }%</TableRowColumn>
+                <TableRowColumn>{props.attr6} (in)</TableRowColumn>
+                <TableRowColumn>{Math.round(props.attr7*100)}</TableRowColumn>
+            </TableRow>
     );
 }
 
