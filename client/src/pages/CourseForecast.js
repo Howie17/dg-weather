@@ -164,7 +164,6 @@ class DSHourly extends React.Component {
                     />
                 ))}
             </div>
-
         );
     }
 }
