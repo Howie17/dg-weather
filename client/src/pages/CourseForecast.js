@@ -16,7 +16,8 @@ class CourseForecast extends React.Component {
         this.setState = this.setState.bind(this);
         this.state = {
             value: '',
-            forecast: []
+            forecast: [],
+            showCheckboxes: false,
         };
     }
 
@@ -32,8 +33,8 @@ class CourseForecast extends React.Component {
         return(
             <div>
                 <DSWeekly name={this.state.value} forecast={this.state.forecast}/>          {/*todo: name should equal the json id returned*/}
-                <Table>
-                    <TableHeader>
+                <Table selectable={false} multiSelectable={false}>
+                    <TableHeader adjustForCheckbox={this.state.showCheckboxes} displaySelectAll={false}>
                         <TableRow>
                             <TableHeaderColumn>Time</TableHeaderColumn>
                             <TableHeaderColumn>Summary</TableHeaderColumn>
@@ -41,7 +42,8 @@ class CourseForecast extends React.Component {
                             <TableHeaderColumn>Feels</TableHeaderColumn>
                             <TableHeaderColumn>Wind</TableHeaderColumn>
                             <TableHeaderColumn>Chance of Rain</TableHeaderColumn>
-                            <TableHeaderColumn>Humidity</TableHeaderColumn>
+                            {/*<TableHeaderColumn>Rainfall (inches)</TableHeaderColumn>*/}
+                            {/*<TableHeaderColumn>Humidity</TableHeaderColumn>*/}
                         </TableRow>
                     </TableHeader>
                     <DSHourly forecast={this.state.forecast}/>
@@ -176,8 +178,8 @@ function Row(props) {
                 <TableRowColumn>{props.attr3} &#x2109;</TableRowColumn>
                 <TableRowColumn>{props.attr4} mph</TableRowColumn>
                 <TableRowColumn>{props.attr5 }%</TableRowColumn>
-                <TableRowColumn>{props.attr6} (in)</TableRowColumn>
-                <TableRowColumn>{Math.round(props.attr7*100)}</TableRowColumn>
+                {/*<TableRowColumn>{props.attr6} (in)</TableRowColumn>*/}
+                {/*<TableRowColumn>{Math.round(props.attr7*100)}</TableRowColumn>*/}
             </TableRow>
     );
 }
