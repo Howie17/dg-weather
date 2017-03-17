@@ -95,15 +95,49 @@ function Tile(props) {
 
 class DSHourly extends React.Component {
 
+    get12Hour(hour){
+        switch((new Date(hour.time * 1000)).getHours()){
+            case 0:
+                return "12";
+            case 13: 
+                return "1";
+            case 14:
+                return "2";
+            case 15:
+                return "3";
+            case 16:
+                return "4";
+            case 17:
+                return "5";
+            case 18:
+                return "6";
+            case 19:
+                return "7";
+            case 20:
+                return "8";
+            case 21:
+                return "9";
+            case 22:
+                return "10";
+            case 23:
+                return "11";
+            case 24:
+                return "12";
+            default:
+                return "";
+        }
+    }
+
     render() {
         let vHourly = this.props.forecast.hourly;
+        
         return(
             <div className="container">
                 <h3>Hourly Forecast for: {this.props.name}</h3><h4>City, State</h4>         {/* todo: this.props.name shouldn't update based on text input, but what is returned via json */}
                 {vHourly && vHourly.data.map((hour, index)=> (           
                     <Row
                         key={index}                                                         // Needed when returning a list of components in a loop
-                        attr1={hour.time}                                                   //todo: convert unix time to hour
+                        attr1={ (new Date(hour.time * 1000).getHours()) <= 12 && (new Date(hour.time * 1000).getHours()) !== 0 ? (new Date(hour.time * 1000).getHours()) : this.get12Hour(hour)}
                         attr2={Math.round(hour.temperature)}                             
                         attr3={Math.round(hour.apparentTemperature)}
                         attr4={Math.round(hour.windSpeed)}
@@ -122,9 +156,9 @@ class DSHourly extends React.Component {
 function Row(props) {
     return (
         <div className="row">                                  
-            <h3>{props.attr1}</h3>
+            <h3>{props.attr1}:00</h3>
             <p> 
-                {props.attr1} {props.attr9} | 
+                {props.attr1}:00 {props.attr9} | 
                 {props.attr8} | 
                 Temp:{props.attr2} &#x2109; | 
                 Feels: {props.attr3} &#x2109; | 
