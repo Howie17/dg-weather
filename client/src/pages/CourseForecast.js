@@ -146,7 +146,7 @@ static muiName = 'TableBody';
         let vHourly = this.props.forecast.hourly;
         
         return(
-            <TableBody>
+            <TableBody className="container">
                 {vHourly && vHourly.data.map((hour, index)=> (           
                     <Row
                         key={index}                                                         // Needed when returning a list of components in a loop
