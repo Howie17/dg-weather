@@ -44,9 +44,8 @@ class CourseForecast extends React.Component {
                             <TableHeaderColumn>Humidity</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody>
-                        <DSHourly forecast={this.state.forecast}/>
-                    </TableBody>
+                    
+                    <DSHourly forecast={this.state.forecast}/>
                 </Table>  
             </div>
         );
@@ -148,7 +147,7 @@ class DSHourly extends React.Component {
         let vHourly = this.props.forecast.hourly;
         
         return(
-            <div className="container">
+            <TableBody className="container">
                 {vHourly && vHourly.data.map((hour, index)=> (           
                     <Row
                         key={index}                                                         // Needed when returning a list of components in a loop
@@ -163,7 +162,7 @@ class DSHourly extends React.Component {
                         attr9={ (new Date(hour.time * 1000)).getHours() <= 12 ? "AM" : "PM"}
                     />
                 ))}
-            </div>
+            </TableBody>
         );
     }
 }
