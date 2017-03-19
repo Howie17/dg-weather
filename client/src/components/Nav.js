@@ -90,6 +90,7 @@ class SearchField extends React.Component {
                     underlineFocusStyle={styles.underlineFocusStyle}
                     value={this.state.value}
                     onChange={this.handleTextChange}
+                    fullWidth={true}
                 />
             </form>
         );
@@ -102,10 +103,13 @@ class TitleBar extends React.Component {
             titleBar: {
                 background: limeA400,
             },
+            search: {
+                width: "30%",
+            },
         };
         return (
             <div>
-                <AppBar title="dg-weather" style={styles.titleBar} iconElementRight={<SearchField/>}/>
+                <AppBar title="dg-weather" style={styles.titleBar} iconStyleRight={styles.search} iconElementRight={<SearchField/>}/>
             </div>
         );
     }
