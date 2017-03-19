@@ -2,6 +2,9 @@ import React from 'react';
 
 import { getCourse } from '../lib/api';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import {Tabs, Tab} from 'material-ui/Tabs';
+import SwipeableViews from 'react-swipeable-views';
+
 /*
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
@@ -9,6 +12,23 @@ import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 */
 import '../Forecast.css';
+
+const styles = {
+  headline: {
+    fontSize: 24,
+    paddingTop: 16,
+    marginBottom: 12,
+    fontWeight: 400,
+  },
+  slide: {
+    padding: 10,
+  },
+  day: {
+      p: {
+          color: "DimGray",
+      },
+  },
+};
 
 class CourseForecast extends React.Component {  
     constructor(props) {
@@ -24,7 +44,6 @@ class CourseForecast extends React.Component {
     componentWillReceiveProps(){     
         let textValue = this.props.routeParams.courseName;
         getCourse(textValue).then(forecast => this.setState({ forecast }));
-        console.log("Forecast requested.");
         //todo: onError display error msg "Course not found."
     }
 
@@ -32,16 +51,16 @@ class CourseForecast extends React.Component {
 
         return(
             <div>
-                <DSWeekly name={this.state.value} forecast={this.state.forecast}/>          {/*todo: name should equal the json id returned*/}
+                <DSWeekly name={this.props.routeParams.courseName} forecast={this.state.forecast}/>
                 <Table selectable={false} multiSelectable={false}>
                     <TableHeader adjustForCheckbox={this.state.showCheckboxes} displaySelectAll={false}>
                         <TableRow>
                             <TableHeaderColumn>Time</TableHeaderColumn>
                             <TableHeaderColumn>Summary</TableHeaderColumn>
-                            <TableHeaderColumn>Temperature</TableHeaderColumn>
+                            <TableHeaderColumn>Temp</TableHeaderColumn>
                             <TableHeaderColumn>Feels</TableHeaderColumn>
                             <TableHeaderColumn>Wind</TableHeaderColumn>
-                            <TableHeaderColumn>Chance of Rain</TableHeaderColumn>
+                            <TableHeaderColumn>Precip</TableHeaderColumn>
                             {/*<TableHeaderColumn>Rainfall (inches)</TableHeaderColumn>*/}
                             {/*<TableHeaderColumn>Humidity</TableHeaderColumn>*/}
                         </TableRow>
@@ -53,8 +72,36 @@ class CourseForecast extends React.Component {
     }
 }
 
-class DSWeekly extends React.Component {
+function getDayOfTheWeek(day) {
+    switch((new Date(day.time * 1000)).getDay()){
+            case 0: 
+                return "Sunday";
+            case 1:
+                return "Monday";
+            case 2:
+                return "Tuesday";
+            case 3:
+                return "Wednesday";
+            case 4:
+                return "Thursday";
+            case 5:
+                return "Friday";
+            case 6:
+                return "Saturday";
+            default:
+                return "Today";
+        }
+}
 
+class DSWeekly extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            slideIndex: 0,
+        };
+    }
+
+    /*
     getDayOfTheWeek(day) {
         switch((new Date(day.time * 1000)).getDay()){
             case 0: 
@@ -75,23 +122,38 @@ class DSWeekly extends React.Component {
                 return "Today";
         }
     }
+    */
     render() {
         let vDaily = this.props.forecast.daily;
         //console.log(vDaily);
         return(
             <div className="container">
-                <h3>Course Forecast for: {this.props.name}</h3><h4>City, State</h4>         {/* todo: this.props.name shouldn't update based on text input, but what is returned via json */}
-                {vDaily && vDaily.data.map((day, index)=> (                                 
-                    <Tile
-                        key={index}                                                         // Needed when returning a list of components in a loop
-                        heading={index === 0 ? "Today" : this.getDayOfTheWeek(day)}
-                        attr1={Math.round(day.temperatureMax)}
-                        attr2={Math.round(day.temperatureMin)}
-                        attr3={Math.round(day.windSpeed)}
-                        attr4={Math.round(day.precipProbability*100)}
-                        attr5="None"
-                    />
-                ))}
+                <h3>Course Forecast for: {this.props.name}</h3><h4>City, State</h4>
+                        <Tabs
+                            onChange={this.handleChange}
+                            value={this.state.slideIndex}
+                        >
+                        {vDaily && vDaily.data.map((day, index)=> ( 
+                            <Tab label={index === 0 ? "Today" : getDayOfTheWeek(day)} key={index} value={index}/>
+                        ))}
+                        </Tabs>
+                        <SwipeableViews
+                            index={this.state.slideIndex}
+                            onChangeIndex={this.handleChange}
+                        >
+                            {vDaily && vDaily.data.map((day, index)=> (
+                                <Tile
+                                    key={index}                                                         // Needed when returning a list of components in a loop
+                                    heading={index === 0 ? "Today" : getDayOfTheWeek(day)}
+                                    attr1={Math.round(day.temperatureMax)}
+                                    attr2={Math.round(day.temperatureMin)}
+                                    attr3={Math.round(day.windSpeed)}
+                                    attr4={Math.round(day.precipProbability*100)}
+                                    attr5="None"
+                                />
+                            ))}
+                            <div></div>
+                        </SwipeableViews>
             </div>
         );
     }
@@ -99,7 +161,7 @@ class DSWeekly extends React.Component {
 
 function Tile(props) {
   return (
-        <div className="tile">                                  
+        <div className="tile" style={styles.slide}>                                  
             <h3>{props.heading}</h3>                                                {/* tile heading: for dg-weather = course name in playable forecast, otherwise blank as the course name is displayed elsewhere (parent usually) */}
             <p>High: {props.attr1}&#x2109; Low: {props.attr2}&#x2109;</p>           {/* Attribute 1 & 2: for dg-weather = Hi/Low temperature */}
             <p>{props.attr3} mph</p>                                                {/* Attribute 3: for dg-weather = wind */}
@@ -161,7 +223,9 @@ static muiName = 'TableBody';
                         attr7={hour.humidity}
                         attr8={hour.summary}
                         attr9={ (new Date(hour.time * 1000)).getHours() <= 12 ? "AM" : "PM"}
+                        attr10={hour}
                     />
+                    
                 ))}
             </TableBody>
         );
@@ -169,10 +233,15 @@ static muiName = 'TableBody';
 }
 
 function Row(props) {
+    let day = props.attr10;
 
     return (
             <TableRow>
-                <TableRowColumn>{props.attr1}:00 {props.attr9}</TableRowColumn>
+                <TableRowColumn>
+                    {props.attr1}:00 {props.attr9}
+                    <br />
+                    <p style={styles.day.p}>{getDayOfTheWeek(day)}</p>
+                </TableRowColumn>
                 <TableRowColumn>{props.attr8}</TableRowColumn>
                 <TableRowColumn>{props.attr2} &#x2109;</TableRowColumn>
                 <TableRowColumn>{props.attr3} &#x2109;</TableRowColumn>
