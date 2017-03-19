@@ -33,7 +33,7 @@
     "state": "Michigan",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1489767328
+    "lastupdate": 1489948300
   },
   "parmelee park": {
     "latitude": 41.768437,
@@ -43,5 +43,59 @@
     "timezone": "America/New_York",
     "offset": -5,
     "lastupdate": 1489679928
+  },
+  "international disc golf center": {
+    "latitude": 33.64618,
+    "longitude": -82.28843,
+    "city": "Appling",
+    "state": "Georgia",
+    "timezone": "America/New_York",
+    "offset": -5,
+    "lastupdate": 1489955070
+  },
+  "willmore park": {
+    "latitude": 38.571357,
+    "longitude": -90.302983,
+    "city": "St. Louis",
+    "state": "Missouri",
+    "timezone": "America/Chicago",
+    "offset": -5,
+    "lastupdate": 1489957730
+  },
+  "lewis club park": {
+    "latitude": 41.677103,
+    "longitude": -93.230989,
+    "city": "Colfax",
+    "state": "Iowa",
+    "timezone": "America/Chicago",
+    "offset": -5,
+    "lastupdate": 1489958880
+  },
+  "george washington park": {
+    "latitude": 39.8151,
+    "longitude": -86.1118,
+    "city": "Indianapolis",
+    "state": "Indiana",
+    "timezone": "America/New_York",
+    "offset": -5,
+    "lastupdate": 1489960775
+  },
+  "veteran's memorial": {
+    "latitude": 41.391431,
+    "longitude": -81.716893,
+    "city": "Parma",
+    "state": "Ohio",
+    "timezone": "America/New_York",
+    "offset": -5,
+    "lastupdate": 1489961792
+  },
+  "phil moore park": {
+    "latitude": 36.897825,
+    "longitude": -86.387907,
+    "city": "Bowling Green",
+    "state": "Kentucky",
+    "timezone": "America/New_York",
+    "offset": -5,
+    "lastupdate": 1489962568
   }
 }
