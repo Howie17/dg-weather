@@ -24,7 +24,7 @@ class CourseForecast extends React.Component {
     componentWillReceiveProps(){     
         let textValue = this.props.routeParams.courseName;
         getCourse(textValue).then(forecast => this.setState({ forecast }));
-        console.log("Forecast received.");
+        console.log("Forecast requested.");
         //todo: onError display error msg "Course not found."
     }
 
