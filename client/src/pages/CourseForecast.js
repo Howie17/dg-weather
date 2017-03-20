@@ -2,8 +2,6 @@ import React from 'react';
 
 import { getCourse } from '../lib/api';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import {Tabs, Tab} from 'material-ui/Tabs';
-import SwipeableViews from 'react-swipeable-views';
 
 /*
 import { GridList, GridTile } from 'material-ui/GridList';
@@ -28,6 +26,13 @@ const styles = {
           color: "DimGray",
       },
   },
+  table: {
+      width: "80%",
+      margin: "auto",
+  },
+  tableRowColumn: {
+      width: "225px",
+  },
 };
 
 class CourseForecast extends React.Component {  
@@ -51,8 +56,27 @@ class CourseForecast extends React.Component {
 
         return(
             <div>
-                <DSWeekly name={this.props.routeParams.courseName} forecast={this.state.forecast}/>
-                <Table selectable={false} multiSelectable={false}>
+                <h3>Course Forecast for: {this.props.name}</h3><h4>City, State</h4>                     {/* todo: Convert City, State to data pull */}
+                {/* Weekly Forecast Table */}
+                <Table selectable={false} multiSelectable={false} style={styles.table}>
+                    <TableHeader adjustForCheckbox={this.state.showCheckboxes} displaySelectAll={false}>
+                        <TableRow>
+                            <TableHeaderColumn>Day</TableHeaderColumn>
+                            <TableHeaderColumn style={styles.tableRowColumn}>Summary</TableHeaderColumn>
+                            <TableHeaderColumn>Temp</TableHeaderColumn>
+                            <TableHeaderColumn>Wind</TableHeaderColumn>
+                            <TableHeaderColumn>Precip</TableHeaderColumn>
+                            <TableHeaderColumn>Alerts</TableHeaderColumn>
+                            {/*<TableHeaderColumn>Rainfall (inches)</TableHeaderColumn>}
+                            <TableHeaderColumn>Humidity</TableHeaderColumn>*/}
+                        </TableRow>
+                    </TableHeader>
+                    <DSWeekly name={this.props.routeParams.courseName} forecast={this.state.forecast}/>
+                </Table>
+                
+                {/* Hourly Forecast Table */}
+                <h3>Hourly Forecast for next 168 hours.</h3>
+                <Table selectable={false} multiSelectable={false} style={styles.table}>
                     <TableHeader adjustForCheckbox={this.state.showCheckboxes} displaySelectAll={false}>
                         <TableRow>
                             <TableHeaderColumn>Time</TableHeaderColumn>
@@ -100,74 +124,46 @@ class DSWeekly extends React.Component {
             slideIndex: 0,
         };
     }
-
-    /*
-    getDayOfTheWeek(day) {
-        switch((new Date(day.time * 1000)).getDay()){
-            case 0: 
-                return "Sunday";
-            case 1:
-                return "Monday";
-            case 2:
-                return "Tuesday";
-            case 3:
-                return "Wednesday";
-            case 4:
-                return "Thursday";
-            case 5:
-                return "Friday";
-            case 6:
-                return "Saturday";
-            default:
-                return "Today";
-        }
-    }
-    */
+    static muiName = 'TableBody';                                                       //Work-around for known bug with Material-UI Tables
     render() {
         let vDaily = this.props.forecast.daily;
-        //console.log(vDaily);
+
         return(
-            <div className="container">
-                <h3>Course Forecast for: {this.props.name}</h3><h4>City, State</h4>
-                        <Tabs
-                            onChange={this.handleChange}
-                            value={this.state.slideIndex}
-                        >
-                        {vDaily && vDaily.data.map((day, index)=> ( 
-                            <Tab label={index === 0 ? "Today" : getDayOfTheWeek(day)} key={index} value={index}/>
-                        ))}
-                        </Tabs>
-                        <SwipeableViews
-                            index={this.state.slideIndex}
-                            onChangeIndex={this.handleChange}
-                        >
-                            {vDaily && vDaily.data.map((day, index)=> (
-                                <Tile
-                                    key={index}                                                         // Needed when returning a list of components in a loop
-                                    heading={index === 0 ? "Today" : getDayOfTheWeek(day)}
-                                    attr1={Math.round(day.temperatureMax)}
-                                    attr2={Math.round(day.temperatureMin)}
-                                    attr3={Math.round(day.windSpeed)}
-                                    attr4={Math.round(day.precipProbability*100)}
-                                    attr5="None"
-                                />
-                            ))}
-                            <div></div>
-                        </SwipeableViews>
-            </div>
+            <TableBody className="container">
+                {vDaily && vDaily.data.map((day, index)=> (
+                    <Tile
+                        key={index}                                                         // Needed when returning a list of components in a loop
+                        heading={index === 0 ? "Today" : getDayOfTheWeek(day)}
+                        attr1={Math.round(day.temperatureMax)}
+                        attr2={Math.round(day.temperatureMin)}
+                        attr3={Math.round(day.windSpeed)}
+                        attr4={Math.round(day.precipProbability*100)}
+                        attr5="None"
+                        attr6={day.summary}
+                    />
+                ))}                        
+            </TableBody>
         );
     }
 }
 
 function Tile(props) {
   return (
-        <div className="tile" style={styles.slide}>                                  
-            <h3>{props.heading}</h3>                                                {/* tile heading: for dg-weather = course name in playable forecast, otherwise blank as the course name is displayed elsewhere (parent usually) */}
-            <p>High: {props.attr1}&#x2109; Low: {props.attr2}&#x2109;</p>           {/* Attribute 1 & 2: for dg-weather = Hi/Low temperature */}
-            <p>{props.attr3} mph</p>                                                {/* Attribute 3: for dg-weather = wind */}
-            <p>{props.attr4}% chance of rain</p>                                    {/* Attribute 4: for dg-weather = % chance of rain for the day */}
-            <p>Alerts: {props.attr5}</p>                                            {/* Attribute 5: for dg-weather = any community generated alerts for that course, ie. holes are flooded, course is muddy/snow covered, etc. */}
-        </div>
+    <TableRow>
+        <TableRowColumn>
+            {props.heading}
+            {/*<br />
+             <p style={styles.day.p}>{getDayOfTheWeek(day)}</p>                  todo: add date of month ie. Mar 19*/}
+        </TableRowColumn>
+        <TableRowColumn style={styles.tableRowColumn}>{props.attr6}</TableRowColumn>
+        <TableRowColumn>{props.attr1} / {props.attr2} &#x2109;</TableRowColumn>     {/* &#x2109; = symbol for degrees Fahnrenheit*/}
+        <TableRowColumn>{props.attr3} mph</TableRowColumn>
+        <TableRowColumn>{props.attr4}% </TableRowColumn>
+        <TableRowColumn></TableRowColumn>
+        {/*<TableRowColumn>{props.attr5} (in)</TableRowColumn>*/}
+        {/*<TableRowColumn>{Math.round(props.attr7*100)}</TableRowColumn>*/}
+    </TableRow>
+
   );
 }
 
@@ -205,7 +201,7 @@ class DSHourly extends React.Component {
                 return "";
         }
     }
-static muiName = 'TableBody';
+    static muiName = 'TableBody';                                                           //Work-around for known bug with Material-UI Tables
     render() {
         let vHourly = this.props.forecast.hourly;
         
@@ -222,7 +218,7 @@ static muiName = 'TableBody';
                         attr6={Math.round(hour.precipIntensity)}
                         attr7={hour.humidity}
                         attr8={hour.summary}
-                        attr9={ (new Date(hour.time * 1000)).getHours() <= 12 ? "AM" : "PM"}
+                        attr9={ (new Date(hour.time * 1000)).getHours() <= 11 ? "AM" : "PM"}
                         attr10={hour}
                     />
                     
