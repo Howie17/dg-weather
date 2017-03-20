@@ -6,7 +6,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1489937943
+    "lastupdate": 1489965214
   },
   "ottawa park": {
     "latitude": 41.665359,
@@ -24,7 +24,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1489236178
+    "lastupdate": 1489976106
   },
   "vienna park": {
     "latitude": 41.788807,
@@ -97,5 +97,14 @@
     "timezone": "America/New_York",
     "offset": -5,
     "lastupdate": 1489962568
+  },
+  "brent hambrick memorial": {
+    "latitude": 40.108086,
+    "longitude": -82.877701,
+    "city": "Columbus",
+    "state": "Ohio",
+    "timezone": "America/New_York",
+    "offset": -5,
+    "lastupdate": 1489963920
   }
 }
