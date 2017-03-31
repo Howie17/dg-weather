@@ -1,0 +1,11 @@
+{
+    "howie17": {
+        "password": "password",
+        "firstName": "Stephen",
+        "lastName": "Howard",
+        "phone": "555-555-5555",
+        "email": "howie17@gmail.com",
+        "emailVerified": true,
+        "paidUser": true
+    }
+}
