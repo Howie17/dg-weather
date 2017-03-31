@@ -5,7 +5,8 @@ var express = require('express'),
     fs = require('fs'),
     request = require('request'),
     compression = require('compression'),
-    router = express.Router();
+    router = express.Router(),
+    jwt = require('jsonwebtoken');          //used to create, sign and verify tokens
 
 
 router.use(function(req, res, next){
@@ -13,12 +14,20 @@ router.use(function(req, res, next){
     next();
 });
 
+/*
+router.route('/register')
+    .get(function(req, res) {
+
+    })
+*/
+
+//Handling course forecast requests
 router.route('/course/:coursename')
-    
     .get(function(req, res) {
         checkLastUpdate(req, res); 
     })
 
+//Checking weather the course forecast is new enough to use or request a new forecast from Darksky
 function checkLastUpdate(req, res){
     let courseList = '';
     fs.readFile('courselist.json', function(err,data){
@@ -48,7 +57,7 @@ function checkLastUpdate(req, res){
     })
 }
 
-//Pull new forecast for the request
+//Pull new forecast from Darksky for the request
 function fetchForecast(req, res) {                                                                 
     let apiKey = "9d007da7fea4783f30a871a05b48c74f";
     let gpsCords = "";
