@@ -106,5 +106,14 @@
     "timezone": "America/New_York",
     "offset": -5,
     "lastupdate": 1489963920
+  },
+  "walsh park": {
+    "latitude": 41.334396,
+    "longitude": -83.111546,
+    "city": "Fremont",
+    "state": "Ohio",
+    "timezone": "America/New_York",
+    "offset": -5,
+    "lastupdate": 1489963920
   }
 }
