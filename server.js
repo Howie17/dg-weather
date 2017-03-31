@@ -6,20 +6,52 @@ var express = require('express'),
     request = require('request'),
     compression = require('compression'),
     router = express.Router(),
-    jwt = require('jsonwebtoken');          //used to create, sign and verify tokens
+    jwt = require('jsonwebtoken')          //used to create, sign and verify tokens
+    bodyParser = require('body-parser');
 
+app.use(bodyParser.urlencoded({extended: true}));
 
 router.use(function(req, res, next){
     console.log('Something is happening.');
     next();
 });
 
-/*
-router.route('/register')
-    .get(function(req, res) {
+router.post('/register', function(req,res,next){
+    console.log('Writing new user to userDB.json');
+    const store = JSON.parse(fs.readFileSync("/users/userDB.json"));
+    store[req.params.userName] = req.body.username;
+    store[req.params.userName].password = req.body.password;
+    store[req.params.userName].firstName = req.body.firstname;
+    store[req.params.userName].lastName = req.body.lastname;
+    store[req.params.userName].email = req.body.email;
+    store[req.params.userName].email = req.body.email;
+    fs.writeFileSync("/users/userDB.json", JSON.stringify(store,null,2));
+});
 
+router.post('/login', function(request, res, next) {
+    console.log('Authenticating user.');
+    let userName = request.body.username.toLowerCase();
+    fs.readFile(__dirname + '/users/userDB.json', function(err, data){
+        if(err){
+            console.log('Error reading userDB.json');
+            console.log(err);
+            return;
+        }
+        userDB = JSON.parse(data);
+        if(userDB.hasOwnProperty(userName)){
+            let reqUser = userDB[userName];
+            if(reqUser.password == request.body.password){
+                console.log('User authenticated.');
+               // res.redirect('/dashboard');
+            } else {
+                console.log('User password is incorrect');
+            }
+        } else {
+            console.log('User does not exist.');
+        }
     })
-*/
+});
+
 
 //Handling course forecast requests
 router.route('/course/:coursename')
@@ -32,7 +64,7 @@ function checkLastUpdate(req, res){
     let courseList = '';
     fs.readFile('courselist.json', function(err,data){
         if(err){
-            console.log('Error checking last update.', err)
+            console.log('Error checking last update.', err);
             return;
         }
         courseList = JSON.parse(data);
