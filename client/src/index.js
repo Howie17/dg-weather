@@ -11,7 +11,7 @@ import './index.css';
 //Pages
 import Layout from './components/Layout';
 import Home from './pages/Home.js';
-import CurrentView from './pages/CurrentView.js';
+//import CurrentView from './pages/CurrentView.js';
 import CourseForecast from './pages/CourseForecast.js';
 /*
 import PlayableByDay from './pages/PlayableByDay';
