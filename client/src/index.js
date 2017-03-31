@@ -10,6 +10,7 @@ import './index.css';
 
 //Pages
 import Layout from './components/Layout';
+import Home from './pages/Home.js';
 import CurrentView from './pages/CurrentView.js';
 import CourseForecast from './pages/CourseForecast.js';
 /*
@@ -27,7 +28,7 @@ ReactDOM.render(
         <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
             <Router history={hashHistory}>
                 <Route path="/" component={Layout}>
-                    <IndexRoute component={CurrentView} />
+                    <IndexRoute component={Home} />
                     <Route path="weekly">
                         <Route path=":courseName" component={CourseForecast}></Route>
                     </Route>
