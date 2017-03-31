@@ -27,7 +27,7 @@ router.route('/course/:coursename')
         checkLastUpdate(req, res); 
     })
 
-//Checking weather the course forecast is new enough to use or request a new forecast from Darksky
+//Checking whether the course forecast is recent enough to use or request a new forecast from Darksky
 function checkLastUpdate(req, res){
     let courseList = '';
     fs.readFile('courselist.json', function(err,data){
