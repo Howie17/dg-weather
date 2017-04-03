@@ -97,7 +97,6 @@ function fetchForecast(req, res) {
     gpsCords = courseList[req.params.coursename].latitude + "," + courseList[req.params.coursename].longitude;
     let myRequest = "https://api.darksky.net/forecast/" + apiKey + "/" + gpsCords + "?extend=hourly";
     let courseName = req.params.coursename;
-    console.log(myRequest);
 
     request(myRequest, function(error, response, body){
         if (error) {
