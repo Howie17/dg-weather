@@ -24,7 +24,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1490973793
+    "lastupdate": 1491244513
   },
   "vienna park": {
     "latitude": 41.788807,
@@ -69,7 +69,7 @@
     "state": "Iowa",
     "timezone": "America/Chicago",
     "offset": -5,
-    "lastupdate": 1489958880
+    "lastupdate": 1491244513
   },
   "george washington park": {
     "latitude": 39.8151,
@@ -105,7 +105,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1489963920
+    "lastupdate": 1491245293
   },
   "walsh park": {
     "latitude": 41.334396,
@@ -132,6 +132,6 @@
     "state": "Michigan",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1491242907
+    "lastupdate": 1491246373
   }
 }
