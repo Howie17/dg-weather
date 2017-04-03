@@ -15,7 +15,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1490973999
+    "lastupdate": 1491243033
   },
   "woodlands park": {
     "latitude": 41.561462,
@@ -42,7 +42,7 @@
     "state": "Michigan",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1489679928
+    "lastupdate": 1491243011
   },
   "international disc golf center": {
     "latitude": 33.64618,
@@ -51,7 +51,7 @@
     "state": "Georgia",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1489955070
+    "lastupdate": 1491243099
   },
   "willmore park": {
     "latitude": 38.571357,
@@ -132,6 +132,6 @@
     "state": "Michigan",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1491235436
+    "lastupdate": 1491242907
   }
 }
