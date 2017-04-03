@@ -8,6 +8,7 @@ var express = require('express'),
     router = express.Router(),
     jwt = require('jsonwebtoken')          //used to create, sign and verify tokens
     bodyParser = require('body-parser');
+let courseList = require('./courselist.json');      //On server initialization assigning the current courselist.json data to the variable courseList
 
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -61,16 +62,9 @@ router.route('/course/:coursename')
 
 //Checking whether the course forecast is recent enough to use or request a new forecast from Darksky
 function checkLastUpdate(req, res){
-    let courseList = '';
-    fs.readFile('courselist.json', function(err,data){
-        if(err){
-            console.log('Error checking last update.', err);
-            return;
-        }
-        courseList = JSON.parse(data);
-        courseName = req.params.coursename.toLowerCase();
+        courseName = req.params.coursename.toLowerCase(); //Setting courseName to the lowercase version of the searched for course
         if (courseList.hasOwnProperty(courseName)){
-            let reqCourse = courseList[courseName];
+            let reqCourse = courseList[courseName];       //Setting reqCourse to the object of the course searched
             console.log("current time: " + (new Date().getTime() / 1000));                          //converting current time from miliseconds to seconds for comparison to darksky api timestamp (seconds)
             console.log("Last update was: " + reqCourse.lastupdate);
             console.log("Time difference = " + (((new Date().getTime() / 1000) - reqCourse.lastupdate) / 60) + " minutes.");
@@ -83,10 +77,10 @@ function checkLastUpdate(req, res){
                 console.log("Most recent forecast sent for the requested course.");
             }
         } else {
-            console.log("*Course does not exist. Please check spelling and try again.");            //todo: Output this to the client's screen below textbox (font=red). +add autocomplete to textbox
+            console.log("*Course does not exist. Please check spelling and try again.");
         }
         
-    })
+    //})
 }
 
 //Pull new forecast from Darksky for the request
@@ -109,12 +103,14 @@ function fetchForecast(req, res) {
                     return console.log(err);
                 }
                 res.sendFile(path.normalize(__dirname + '/courses/' + req.params.coursename + '.json'));
-                console.log("A forecast was saved for " + courseName + "!");
+                console.log("A new forecast was saved for " + courseName + "!");
                 
                 //Now update the lastupdate timestamp for the requested course
                 const store = JSON.parse(fs.readFileSync("courselist.json"));
                 store[req.params.coursename].lastupdate = (Math.round(new Date().getTime() / 1000));
                 fs.writeFileSync("courselist.json", JSON.stringify(store,null,2));
+                //console.log(store);
+                courseList = store;
             })
         }
     })
