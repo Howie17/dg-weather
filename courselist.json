@@ -6,7 +6,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1490973073
+    "lastupdate": 1491239858
   },
   "ottawa park": {
     "latitude": 41.665359,
@@ -33,7 +33,7 @@
     "state": "Michigan",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1489979965
+    "lastupdate": 1491240070
   },
   "parmelee park": {
     "latitude": 41.768437,
@@ -87,7 +87,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1490981236
+    "lastupdate": 1491239874
   },
   "phil moore park": {
     "latitude": 36.897825,
@@ -114,6 +114,24 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1489963920
+    "lastupdate": 1491235436
+  },
+  "hedges boyer park": {
+    "latitude": 41.106107,
+    "longitude": -83.159825,
+    "city": "Tiffin",
+    "state": "Ohio",
+    "timezone": "America/New_York",
+    "offset": -5,
+    "lastupdate": 1491235436
+  },
+  "flip city": {
+    "latitude": 43.621817,
+    "longitude": -86.248567,
+    "city": "Shelby",
+    "state": "Michigan",
+    "timezone": "America/New_York",
+    "offset": -5,
+    "lastupdate": 1491235436
   }
 }
