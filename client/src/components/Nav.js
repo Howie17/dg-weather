@@ -8,7 +8,8 @@ import {hashHistory} from 'react-router';
 import AppBar from 'material-ui/AppBar';
 //import FontIcon from 'material-ui/FontIcon';
 //import IconButton from 'material-ui/IconButton';
-import TextField from 'material-ui/TextField';
+//import TextField from 'material-ui/TextField';
+import AutoComplete from 'material-ui/AutoComplete';
 import {deepOrangeA400, grey600, grey800, limeA400} from 'material-ui/styles/colors';
 
 class Nav extends React.Component {
@@ -41,10 +42,10 @@ class SearchField extends React.Component {
         this.state = {
             value: '',
         };
-        
     }
+
     handleTextChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({value: event});
     }
     handleSearchClick(e) {
         let textValue = this.state.value;                                                                  //todo: onError display error msg "Course not found." 
@@ -53,46 +54,47 @@ class SearchField extends React.Component {
         } else {
             hashHistory.push('weekly/' + textValue);
         }
-        e.preventDefault();
+
+        //e.preventDefault();
     }
 
     render() {
         const styles = {
+            color: grey600,
             errorStyle: {
                 color: deepOrangeA400,
-            },
-            floatingLabelStyle: {
-                color: grey800,
             },
             hintStyle: {
                 color: grey600,
             },
-            textField: {
+            inputStyle: {
                 color: grey800,
             },
             underlineStyle: {
                borderColor: grey800,
+               color: grey800,
             },
             underlineFocusStyle: {
                borderColor: grey800,
             }
         };
-            
+        
+        let courseList=require('../lib/courses.json');
+        
         return (
-            <form onSubmit={this.handleSearchClick}>
-                <TextField 
-                    className="searchField" 
-                    hintText="Search" 
-                    hintStyle={styles.hintStyle}
-                    floatingLabelStyle={styles.floatingLabelStyle}
-                    inputStyle={styles.textField}
-                    underlineStyle={styles.underlineStyle} 
-                    underlineFocusStyle={styles.underlineFocusStyle}
+                <AutoComplete
+                    hintText="Search"
+                    filter={AutoComplete.caseInsensitiveFilter}
+                    dataSource={courseList}
+                    maxSearchResults={8}
+                    onUpdateInput={this.handleTextChange}
                     value={this.state.value}
-                    onChange={this.handleTextChange}
-                    fullWidth={true}
+                    onNewRequest={this.handleSearchClick}
+                    hintStyle={styles}
+                    underlineStyle={styles.underlineStyle}
+                    underlineFocusStyle={styles.underlineFocusStyle}
+                    inputStyle={styles.inputStyle}
                 />
-            </form>
         );
     }
 }
