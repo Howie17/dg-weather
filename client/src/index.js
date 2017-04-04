@@ -12,6 +12,7 @@ import './index.css';
 import Layout from './components/Layout';
 import Home from './pages/Home.js';
 //import CurrentView from './pages/CurrentView.js';
+import Preferences from './pages/Preferences.js';
 import CourseForecast from './pages/CourseForecast.js';
 /*
 import PlayableByDay from './pages/PlayableByDay';
@@ -29,6 +30,7 @@ ReactDOM.render(
             <Router history={hashHistory}>
                 <Route path="/" component={Layout}>
                     <IndexRoute component={Home} />
+                    <Route path="preferences" component={Preferences}></Route>
                     <Route path="weekly">
                         <Route path=":courseName" component={CourseForecast}></Route>
                     </Route>
