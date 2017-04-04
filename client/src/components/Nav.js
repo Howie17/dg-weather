@@ -79,7 +79,7 @@ class SearchField extends React.Component {
             }
         };
         
-        let courseList=require('../lib/courses.json');
+        let courseList=require('../storage/courses.json');
         
         return (
                 <AutoComplete
