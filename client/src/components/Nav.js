@@ -1,14 +1,7 @@
 import React from 'react';
 import '../Nav.css';
 import {hashHistory} from 'react-router';
-//import { Link } from 'react-router';
-//import { getCourse } from '../lib/api';
-
-//material-ui imports
 import AppBar from 'material-ui/AppBar';
-//import FontIcon from 'material-ui/FontIcon';
-//import IconButton from 'material-ui/IconButton';
-//import TextField from 'material-ui/TextField';
 import AutoComplete from 'material-ui/AutoComplete';
 import {deepOrangeA400, grey600, grey800, limeA400} from 'material-ui/styles/colors';
 
@@ -16,17 +9,7 @@ class Nav extends React.Component {
     render() {
     
         return (
-            <div className="navBar">
-                {/*
-                <Link to="PlayableByDay"><button className="button">Playable Courses by Day</button></Link> | 
-                
-                <Link to="CourseSearchForecast"><button className="button">Course Search Forecast</button></Link> | 
-                {/*
-                <Link to="/"><button className="button">Playable Forecast</button></Link> | 
-                <Link to="/Preferences"><button className="button">Preferences</button></Link> 
-                <Link to="/DSForecast"></Link> 
-                */}
-                
+            <div className="navBar">              
                   <TitleBar />
             </div>
         );
