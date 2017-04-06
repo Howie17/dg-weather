@@ -46,22 +46,43 @@ class ContentIdealCond extends React.Component {
         this.handleIdealWind=this.handleIdealWind.bind(this);
         this.handleIdealMinTemp=this.handleIdealMinTemp.bind(this);
         this.handleIdealMaxTemp=this.handleIdealMaxTemp.bind(this);
+        
     }    
 
     handleIdealWind(e, value){
         if (value >= 0 && value <= 40) {
-            this.props.onWindChange(value);
+            this.props.onWindChange(Number(value));
         } else if (value > 40) {
             this.props.onWindChange(40);
+        } else if (value < 0) {
+            this.props.onWindChange(0);
+        } else {
+            console.log("Invalid input: Please input a value between 0 - 40.");
         }
     }
 
-    handleIdealMinTemp(e){
-        this.props.onMinTempChange(e.target.value);
+    handleIdealMinTemp(e, value){
+        if (value >= 0 && value <= 70) {
+            this.props.onMinTempChange(Number(value));
+        } else if (value > 70) {
+            this.props.onMinTempChange(70);
+        } else if (value < 0) {
+            this.props.onMinTempChange(0);
+        } else {
+            console.log("Invalid input: Please input a value between 0 - 70.");
+        }
     }
 
-    handleIdealMaxTemp(e){
-        this.props.onMaxTempChange(e.target.value);
+    handleIdealMaxTemp(e, value){
+        if (value >= 0 && value <= 120) {
+            this.props.onMaxTempChange(Number(value));
+        } else if (value > 120) {
+            this.props.onMaxTempChange(120);
+        } else if (value < 0) {
+            this.props.onMaxTempChange(0);
+        } else {
+            console.log("Invalid input: Please input a value between 0 - 120.");
+        }
     }
 
     render(){
@@ -77,8 +98,7 @@ class ContentIdealCond extends React.Component {
                         name="idealMaxWind"
                     /> 
                     <Slider
-                        defaultValue={12}
-                        min={1}
+                        min={0}
                         max={40}
                         step={1}
                         axis="x"
@@ -93,9 +113,8 @@ class ContentIdealCond extends React.Component {
                     name="idealMinTemp"
                 />
                 <Slider
-                    defaultValue={60}
-                    min={-5}
-                    max={110}
+                    min={0}
+                    max={70}
                     step={1}
                     axis="y-reverse"
                     value={this.props.idealMinTemp}
@@ -108,7 +127,6 @@ class ContentIdealCond extends React.Component {
                     name="idealMaxTemp"
                 />
                 <Slider
-                    defaultValue={80}
                     min={0}
                     max={120}
                     step={1}
@@ -129,16 +147,40 @@ class ContentUnplayCond extends React.Component {
         this.handleUnplayMaxTemp=this.handleUnplayMaxTemp.bind(this);
     }    
 
-    handleUnplayWind(e){
-        this.props.onWindChange(e.target.value);
+    handleUnplayWind(e, value){
+        if (value >= 0 && value <= 40) {
+            this.props.onWindChange(Number(value));
+        } else if (value > 40) {
+            this.props.onWindChange(40);
+        } else if (value < 0) {
+            this.props.onWindChange(0);
+        } else {
+            console.log("Invalid input: Please input a value between 0 - 40.");             //todo: client-side error handling
+        }
     }
 
-    handleUnplayMinTemp(e){
-        this.props.onMinTempChange(e.target.value);
+    handleUnplayMinTemp(e, value){
+        if (value >= -10 && value <= 65) {
+            this.props.onMinTempChange(Number(value));
+        } else if (value > 65) {
+            this.props.onMinTempChange(65);
+        } else if (value < -10) {
+            this.props.onMinTempChange(-10);
+        } else {
+            console.log("Invalid input: Please input a value between -10 - 65.");
+        }
     }
 
-    handleUnplayMaxTemp(e){
-        this.props.onMaxTempChange(e.target.value);
+    handleUnplayMaxTemp(e, value){
+        if (value >= 0 && value <= 120) {
+            this.props.onMaxTempChange(Number(value));
+        } else if (value > 120) {
+            this.props.onMaxTempChange(120);
+        } else if (value < 0) {
+            this.props.onMaxTempChange(0);
+        } else {
+            console.log("Invalid input: Please input a value between 0 - 120.");
+        }
     }
     render(){
 
@@ -152,8 +194,7 @@ class ContentUnplayCond extends React.Component {
                             name="idealMaxWind"
                     />        
                     <Slider
-                        defaultValue={28}
-                        min={1}
+                        min={0}
                         max={40}
                         step={1}
                         axis="x"
@@ -168,11 +209,10 @@ class ContentUnplayCond extends React.Component {
                         name="idealMaxWind"
                 />   
                 <Slider
-                    defaultValue={25}
-                    min={-5}
-                    max={110}
+                    min={-10}
+                    max={65}
                     step={1}
-                    axis="y-reverse"
+                    axis="y"
                     value={this.props.unplayMinTemp}
                     onChange={this.handleUnplayMinTemp}
                 />
@@ -183,7 +223,6 @@ class ContentUnplayCond extends React.Component {
                         name="idealMaxWind"
                 />   
                 <Slider
-                    defaultValue={105}
                     min={0}
                     max={120}
                     step={1}
@@ -203,45 +242,42 @@ class ContentPlayCond extends React.Component {
         return(
             <div style={styles.root}>
                 <p>Max Wind (Mph): </p>
-                <div style={styles.root}>
+                <div>
                     <TextField
                         value={this.props.playWind}
-                        onChange={this.handlePlayWind}
+                        disabled={true}
                         name="playMaxWind"
                     />   
                     <Slider
-                        defaultValue={27}
-                        min={1}
+                        min={0}
                         max={40}
                         step={1}
                         axis="x"
                         disabled={true}
                         value={this.props.playWind}
                     />
+                </div>
                     <p>Min Temp (F): </p>
                     <TextField
                         value={this.props.playMinTemp}
-                        onChange={this.handlePlayMinTemp}
+                        disabled={true}
                         name="playMaxWind"
                     />   
                     <Slider
-                        defaultValue={26}
-                        min={-5}
-                        max={110}
+                        min={-10}
+                        max={70}
                         step={1}
-                        axis="y-reverse"
+                        axis="y"
                         disabled={true}
                         value={this.props.playMinTemp}
                     />
-                </div>
                 <p>Max Temp (F): </p>
                 <TextField
                     value={this.props.playMaxTemp}
-                    onChange={this.handlePlayMaxTemp}
+                    disabled={true}
                     name="playMaxTemp"
                 />   
                 <Slider
-                    defaultValue={104}
                     min={0}
                     max={120}
                     step={1}
@@ -283,29 +319,27 @@ class Preferences extends React.Component {
     }
     
     //Data Changes
-    handleIdealMaxTempSlider = (event, value) => {
+    handleIdealMaxTempSlider(value) {
         this.setState({idealMaxTemp: value});
     };
 
-    handleIdealMinTempSlider = (event, value) => {
+    handleIdealMinTempSlider(value) {
         this.setState({idealMinTemp: value});
     };
-    handleIdealWindSlider = (event, value) => {
+    handleIdealWindSlider(value) {
         this.setState({idealWind: value});
-        console.log(event.target);
-        console.log(value);
     };
 
-    handleUnplayMaxTempSlider = (event, value) => {
+    handleUnplayMaxTempSlider(value) {
         this.setState({unplayMaxTemp: value});
         this.setState({playMaxTemp: value - 1});
     };
-    handleUnplayMinTempSlider = (event, value) => {
+    handleUnplayMinTempSlider(value) {
         this.setState({unplayMinTemp: value});
         this.setState({playMinTemp: value + 1});
     };
 
-    handleUnplayWindSlider = (event, value) => {
+    handleUnplayWindSlider(value) {
         this.setState({unplayWind: value});
         this.setState({playWind: value - 1});
     };
