@@ -14,13 +14,6 @@ import Home from './pages/Home.js';
 //import CurrentView from './pages/CurrentView.js';
 import Preferences from './pages/Preferences.js';
 import CourseForecast from './pages/CourseForecast.js';
-/*
-import PlayableByDay from './pages/PlayableByDay';
-import PlayableForecast from './pages/PlayableForecast';
-import Preferences from './pages/Preferences';
-*/
-
-
 
 injectTapEventPlugin();
 
