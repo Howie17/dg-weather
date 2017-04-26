@@ -6,7 +6,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1491324502
+    "lastupdate": 1491840384
   },
   "ottawa park": {
     "latitude": 41.665359,
@@ -15,7 +15,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1491829993
+    "lastupdate": 1491836918
   },
   "woodlands park": {
     "latitude": 41.561462,
@@ -24,7 +24,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1491244513
+    "lastupdate": 1493047695
   },
   "vienna park": {
     "latitude": 41.788807,
@@ -33,7 +33,7 @@
     "state": "Michigan",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1491240070
+    "lastupdate": 1491840354
   },
   "parmelee park": {
     "latitude": 41.768437,
@@ -87,7 +87,7 @@
     "state": "Ohio",
     "timezone": "America/New_York",
     "offset": -5,
-    "lastupdate": 1491239874
+    "lastupdate": 1493047695
   },
   "phil moore park": {
     "latitude": 36.897825,
