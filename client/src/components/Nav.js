@@ -3,7 +3,9 @@ import '../Nav.css';
 import {hashHistory} from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import AutoComplete from 'material-ui/AutoComplete';
-import {deepOrangeA400, grey600, grey800, limeA400} from 'material-ui/styles/colors';
+import {deepOrangeA400, grey600, grey800, blue500} from 'material-ui/styles/colors';
+let courseList=require('../storage/courses.json');
+
 
 class Nav extends React.Component {
     render() {
@@ -26,16 +28,30 @@ class SearchField extends React.Component {
             value: '',
         };
     }
-
+    
     handleTextChange(event) {
         this.setState({value: event});
     }
     handleSearchClick(e) {
         let textValue = this.state.value;                                                                  //todo: onError display error msg "Course not found." 
+        let len = courseList.length;
+        let title = "", match = false;
+
+        for (let i = 0; i < len; i++){
+            title = courseList[i];
+            if (textValue === title){
+                match = true;
+            }
+        } 
+
         if (textValue === "") {
-            console.log("Error: Course does not exist.")
-        } else {
+            console.log("Error: No input provided.");                    //Doesn't ever execute
+        } else if ( match === false) {
+            console.log("Error: Course does not match.");
+            this.setState({errors: "Course does not match, please check spelling and try again."});
+        } else if (match === true) {
             hashHistory.push('weekly/' + textValue);
+            this.setState({errors: ""});
         }
 
         //e.preventDefault();
@@ -62,7 +78,7 @@ class SearchField extends React.Component {
             }
         };
         
-        let courseList=require('../storage/courses.json');
+        //let courseList=require('../storage/courses.json');
         
         return (
                 <AutoComplete
@@ -77,6 +93,8 @@ class SearchField extends React.Component {
                     underlineStyle={styles.underlineStyle}
                     underlineFocusStyle={styles.underlineFocusStyle}
                     inputStyle={styles.inputStyle}
+                    id="search"
+                    errorText={this.state.errors}
                 />
         );
     }
@@ -86,7 +104,7 @@ class TitleBar extends React.Component {
     render() {
         const styles = {
             titleBar: {
-                background: limeA400,
+                background: blue500,
             },
             search: {
                 width: "30%",
