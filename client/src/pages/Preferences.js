@@ -396,7 +396,7 @@ class Preferences extends React.Component {
         const contentStyle = {margin: '0 16px'};
 
         return(
-            <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
+            <div style={{width: '100%', maxWidth: 700, margin: 'auto', "background-color": "#303030", color: "#808080"}}>
                 <Stepper linear={false} activeStep={stepIndex}>
                     <Step>
                         <StepButton onClick={() => this.setState({stepIndex: 0})}>
@@ -416,23 +416,25 @@ class Preferences extends React.Component {
                 </Stepper>
                 <div style={contentStyle}>
                     {this.getStepContent(stepIndex)}
-                    <div style={{marginTop: 12}}>
+                    <div style={{marginTop: 75}}>
                         <FlatButton
                             label="Back"
                             disabled={stepIndex === 0}
                             onTouchTap={this.handlePrev}
-                            style={{marginRight: 12}}
+                            style={{marginLeft: "25%", marginRight: 12}}
                         />
                         <RaisedButton
                             label="Next"
                             disabled={stepIndex === 2}
                             primary={true}
                             onTouchTap={this.handleNext}
+                            style={{marginRight: 12}}
                         />
                         <RaisedButton
                             label="Save Changes"
                             primary={true}
                             onTouchTap={this.handleNext}
+                            style={{marginRight: 12}}
                         />
                     </div>
                 </div>
