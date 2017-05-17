@@ -33,6 +33,10 @@ const styles = {
   },
 };
 
+function validateForm(e) {
+    
+}
+
 class AddCourse extends React.Component {  
     constructor(props) {
         super(props);
@@ -64,7 +68,6 @@ class AddCourse extends React.Component {
     
     handleCourseNameChange(e) {
         this.setState({CourseName: e.target.value});
-        console.log(this.state.CourseName);
         //Check to see if course already exists
         let textValue = this.state.CourseName;                    //todo: onError display error msg "Course not found." 
         let len = courseList.length;
@@ -81,7 +84,7 @@ class AddCourse extends React.Component {
             console.log("Error: No input provided.");
         } else if ( match === false) {
             this.setState({errors: ""});
-            this.setState({submit: false});
+            validateForm();
         } else if (match === true) {
             this.setState({errors: "Course name found, please double-check that this is a unique course. Once confirmed, provide a unique name (ie. add the two letter state code in parenthesis to the course name)."});
             this.setState({submit: true});
@@ -107,7 +110,7 @@ class AddCourse extends React.Component {
             console.log("Error: No input provided.");
         } else if ( match === false) {
             this.setState({errors: ""});
-            this.setState({submit: false});
+            validateForm();
         } else if (match === true) {
             this.setState({errors: "Course name found, please double-check that this is a unique course. Once confirmed, provide a unique name (ie. add the two letter state code in parenthesis to the course name)."});
             this.setState({submit: true});
