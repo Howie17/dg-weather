@@ -47,7 +47,6 @@ class SearchField extends React.Component {
         if (textValue === "") {
             console.log("Error: No input provided.");                    //Doesn't ever execute
         } else if ( match === false) {
-            console.log("Error: Course does not match.");
             this.setState({errors: "Course does not match, please check spelling and try again."});
         } else if (match === true) {
             hashHistory.push('weekly/' + textValue);
