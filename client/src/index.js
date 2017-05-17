@@ -14,6 +14,7 @@ import Home from './pages/Home.js';
 //import CurrentView from './pages/CurrentView.js';
 import Preferences from './pages/Preferences.js';
 import CourseForecast from './pages/CourseForecast.js';
+import AddCourse from './pages/AddCourse.js';
 
 injectTapEventPlugin();
 
@@ -24,6 +25,7 @@ ReactDOM.render(
                 <Route path="/" component={Layout}>
                     <IndexRoute component={Home} />
                     <Route path="preferences" component={Preferences}></Route>
+                    <Route path="AddCourse" component={AddCourse}></Route>
                     <Route path="weekly">
                         <Route path=":courseName" component={CourseForecast}></Route>
                     </Route>
